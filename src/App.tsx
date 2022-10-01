@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import { PersonsItem } from './auto-gen/interfaces';
+import { PersonList } from './components/person-list';
+import 'antd/dist/antd.css';
 
 function App() {
+  const [state, setState] = useState<PersonsItem[]>([]);
+  useEffect(() => {
+    fetch(`http://localhost:4000/persons`)
+      .then((res) => res.json())
+      .then((x) => setState(x ?? []));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <PersonList persons={state} onChange={setState} />
+      {JSON.stringify(state)}
+    </>
   );
 }
 

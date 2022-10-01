@@ -1,5 +1,3 @@
-export interface UnitOfWork {
-  load(): Promise<void>;
-  rollback(): void;
-  getChanges(): string;
-}
+import { produce } from 'immer';
+
+export class UnitOfWork<T> {}

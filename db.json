@@ -1,3 +1,37 @@
 {
-  "person": []
+  "persons": [
+    {
+      "id": "1234",
+      "forename": "Michael",
+      "surname": "Coxeter",
+      "addresses": [
+        {
+          "street1": "Eventrybakken 22",
+          "street2": "",
+          "postcode": "9240",
+          "city": "Nibe",
+          "country": "DK"
+        }
+      ],
+      "vehicles": [
+        {
+          "reg": "BK92947",
+          "model": {
+            "name": "citroen c3",
+            "enginespec": {
+              "maxSpeed": "188 hm/h",
+              "zeroToOnHundred": "10.01 sec",
+              "fuelConsumption": "4.6-4.8 l/100 km"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "company": [
+    {
+      "id": "546546",
+      "name": "Elsevier"
+    }
+  ]
 }
