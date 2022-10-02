@@ -1,4 +1,4 @@
-import { Form, Input } from 'antd';
+import { Card, Form, Input } from 'antd';
 import { AddressesItem } from '../auto-gen/interfaces';
 
 export interface AddressProps {
@@ -15,7 +15,7 @@ export const Address = (props: AddressProps) => {
   });
 
   return (
-    <Form>
+    <Card title='Address' actions={[]}>
       <Form.Item label='Street 1'>
         <Input
           type={'text'}
@@ -37,6 +37,6 @@ export const Address = (props: AddressProps) => {
           onChange={(v) => props.onChange(postcodeReducer(v.target.value))}
         ></Input>
       </Form.Item>
-    </Form>
+    </Card>
   );
 };
