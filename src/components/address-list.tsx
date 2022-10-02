@@ -9,6 +9,7 @@ import {
   PlusOutlined,
   UpOutlined
 } from '@ant-design/icons';
+import { down, up } from '../array-utils';
 const { Panel } = Collapse;
 
 export interface AddressListProps {
@@ -18,25 +19,6 @@ export interface AddressListProps {
 export const AddressList = (props: AddressListProps) => {
   const upActive = (i: number) => i > 0;
   const downActive = (i: number) => i < props.addresses.length - 1;
-  const up = (i: number) => {
-    if (upActive(i)) {
-      const copy = [...props.addresses];
-      let temp = copy[i - 1];
-      copy[i - 1] = copy[i];
-      copy[i] = temp;
-      props.onChange(copy);
-    }
-  };
-
-  const down = (i: number) => {
-    if (downActive(i)) {
-      const copy = [...props.addresses];
-      let temp = copy[i + 1];
-      copy[i + 1] = copy[i];
-      copy[i] = temp;
-      props.onChange(copy);
-    }
-  };
 
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
   const newItem: AddressesItem = {
@@ -74,7 +56,7 @@ export const AddressList = (props: AddressListProps) => {
                   disabled={!upActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    up(i);
+                    props.onChange(up(props.addresses, i));
                   }}
                 />
                 <Button
@@ -83,7 +65,7 @@ export const AddressList = (props: AddressListProps) => {
                   disabled={!downActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    down(i);
+                    props.onChange(down(props.addresses, i));
                   }}
                 />
                 <Button

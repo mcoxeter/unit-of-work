@@ -13,6 +13,7 @@ import { AddressList } from './address-list';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../services/person-context';
 import moment from 'moment';
+import { UserOutlined } from '@ant-design/icons';
 const { Panel } = Collapse;
 
 export const Person = () => {
@@ -37,6 +38,7 @@ export const Person = () => {
     <Card size='small'>
       <PageHeader
         title='Person'
+        avatar={{ size: 64, icon: <UserOutlined /> }}
         subTitle={`${current.forename} ${current.surname}`}
         extra={[
           <Button

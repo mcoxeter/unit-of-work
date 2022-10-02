@@ -9,10 +9,6 @@ export interface AddressProps {
 export const Address = (props: AddressProps) => {
   const address = props.address;
 
-  const street1Reducer = (street1: string) => ({ ...address, street1 });
-  const street2Reducer = (street2: string) => ({ ...address, street2 });
-  const postcodeReducer = (postcode: string) => ({ ...address, postcode });
-
   return (
     <Card title='Address' actions={[]}>
       <Form.Item label='Street 1'>
