@@ -1,8 +1,18 @@
 import { AddressesItem } from '../auto-gen/interfaces';
-import { Alert, Button, Card, Collapse, Form, Input, PageHeader } from 'antd';
+import {
+  Alert,
+  Button,
+  Card,
+  Collapse,
+  DatePicker,
+  Form,
+  Input,
+  PageHeader
+} from 'antd';
 import { AddressList } from './address-list';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../services/person-context';
+import moment from 'moment';
 const { Panel } = Collapse;
 
 export const Person = () => {
@@ -16,8 +26,6 @@ export const Person = () => {
     return null;
   }
 
-  const fornameReducer = (forename: string) => ({ ...current, forename });
-  const surnameReducer = (surname: string) => ({ ...current, surname });
   const addressesReducer = (addresses: AddressesItem[]) => ({
     ...current,
     addresses
@@ -62,21 +70,47 @@ export const Person = () => {
               type={'text'}
               value={current.forename}
               onChange={(v) =>
-                personContext.update(fornameReducer(v.target.value))
+                personContext.update({ ...current, forename: v.target.value })
               }
             />
           </Form.Item>
           <Form.Item label='Surname'>
             <Input
               type={'text'}
-              value={current?.surname}
+              value={current.surname}
               onChange={(v) =>
-                personContext.update(surnameReducer(v.target.value))
+                personContext.update({ ...current, surname: v.target.value })
               }
             ></Input>
           </Form.Item>
+          <Form.Item label='Age'>
+            <Input
+              type={'number'}
+              value={current.age}
+              onChange={(v) =>
+                personContext.update({
+                  ...current,
+                  age: Number(v.target.value)
+                })
+              }
+            ></Input>
+          </Form.Item>
+          <Form.Item label='Date of Birth'>
+            <DatePicker
+              allowClear={false}
+              value={moment(current.dob)}
+              onChange={(v) =>
+                personContext.update({ ...current, dob: v?.toJSON() ?? '' })
+              }
+            />
+          </Form.Item>
         </Panel>
-        <Panel key={'Address List'} header='Address List'>
+        <Panel
+          key={'Address List'}
+          header={`Addresses: ${(current?.addresses ?? [])
+            .map((x) => x.street1)
+            .join(', ')}`}
+        >
           <AddressList
             addresses={current?.addresses ?? []}
             onChange={(v) => personContext.update(addressesReducer(v))}

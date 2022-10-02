@@ -4,7 +4,16 @@
       "id": "1234",
       "forename": "Michael",
       "surname": "Coxeter",
+      "age": 54,
+      "dob": "1966-08-15T09:44:04.057Z",
       "addresses": [
+        {
+          "street1": "Askevej 12",
+          "street2": "",
+          "postcode": "9982",
+          "city": "Aalborg",
+          "country": "DK"
+        },
         {
           "street1": "Eventrybakken 22",
           "street2": "",

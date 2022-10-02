@@ -3,6 +3,12 @@ import { Address } from './address';
 import { Button, Card, Collapse, PageHeader } from 'antd';
 import { useState } from 'react';
 import { Flex } from './flex';
+import {
+  DeleteOutlined,
+  DownOutlined,
+  PlusOutlined,
+  UpOutlined
+} from '@ant-design/icons';
 const { Panel } = Collapse;
 
 export interface AddressListProps {
@@ -47,7 +53,8 @@ export const AddressList = (props: AddressListProps) => {
         title='Addresses'
         extra={[
           <Button
-            type='primary'
+            icon={<PlusOutlined />}
+            type='dashed'
             onClick={() => props.onChange(props.addresses.concat(newItem))}
           >
             Add
@@ -63,34 +70,31 @@ export const AddressList = (props: AddressListProps) => {
               <Flex>
                 <Button
                   type='default'
+                  icon={<UpOutlined />}
                   disabled={!upActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
                     up(i);
                   }}
-                >
-                  Move up
-                </Button>
+                />
                 <Button
                   type='default'
+                  icon={<DownOutlined />}
                   disabled={!downActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
                     down(i);
                   }}
-                >
-                  Move down
-                </Button>
+                />
                 <Button
                   type='default'
                   danger
+                  icon={<DeleteOutlined />}
                   onClick={(e) => {
                     e.stopPropagation();
                     props.onChange(props.addresses.filter((_, _i) => i !== _i));
                   }}
-                >
-                  Delete
-                </Button>
+                />
               </Flex>
             ]}
           >
