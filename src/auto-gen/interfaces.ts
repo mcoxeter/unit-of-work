@@ -4,7 +4,7 @@ export type RootObject = {
     company: CompanyItem[];
 };
 export type PersonsItem = {
-    id: string;
+    id: number;
     forename: string;
     surname: string;
     addresses: AddressesItem[];
