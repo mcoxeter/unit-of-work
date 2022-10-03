@@ -1,8 +1,8 @@
 {
   "persons": [
     {
-      "id": "1234",
-      "forename": "Michael",
+      "id": 1234,
+      "forename": "Michael John",
       "surname": "Coxeter",
       "age": 54,
       "dob": "1966-08-15T09:44:04.057Z",
@@ -26,11 +26,11 @@
         {
           "reg": "BK92947",
           "model": {
-            "name": "citroen c3",
+            "name": "Citroen C3",
             "enginespec": {
               "maxSpeed": "188 hm/h",
               "zeroToOnHundred": "10.01 sec",
-              "fuelConsumption": "4.6-4.8 l/100 km"
+              "fuelConsumption": "4.6-4.9"
             }
           }
         }

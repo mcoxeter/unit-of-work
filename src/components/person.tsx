@@ -1,19 +1,20 @@
 import { AddressesItem } from '../auto-gen/interfaces';
 import {
-  Alert,
   Button,
   Card,
   Collapse,
   DatePicker,
   Form,
   Input,
-  PageHeader
+  PageHeader,
+  Progress
 } from 'antd';
 import { AddressList } from './address-list';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../services/person-context';
 import moment from 'moment';
 import { UserOutlined } from '@ant-design/icons';
+import { VehiclesList } from './vehicles-list';
 const { Panel } = Collapse;
 
 export const Person = () => {
@@ -55,10 +56,12 @@ export const Person = () => {
           >
             Restore
           </Button>,
-          <Alert
-            type={isModified ? 'warning' : 'success'}
-            message={isModified ? 'Data unsaved' : 'Data saved'}
-          ></Alert>
+          <Progress
+            type='circle'
+            format={() => (isModified ? 'Dirty' : 'Saved')}
+            width={50}
+            status={isModified ? 'exception' : 'success'}
+          />
         ]}
       ></PageHeader>
 
@@ -71,9 +74,9 @@ export const Person = () => {
             <Input
               type={'text'}
               value={current.forename}
-              onChange={(v) =>
-                personContext.update({ ...current, forename: v.target.value })
-              }
+              onChange={(v) => {
+                personContext.update({ ...current, forename: v.target.value });
+              }}
             />
           </Form.Item>
           <Form.Item label='Surname'>
@@ -109,13 +112,29 @@ export const Person = () => {
         </Panel>
         <Panel
           key={'Address List'}
-          header={`Addresses: ${(current?.addresses ?? [])
+          header={`Addresses: ${(current.addresses ?? [])
             .map((x) => x.street1)
             .join(', ')}`}
         >
           <AddressList
-            addresses={current?.addresses ?? []}
+            addresses={current.addresses ?? []}
             onChange={(v) => personContext.update(addressesReducer(v))}
+          />
+        </Panel>
+        <Panel
+          key={'Vehicle List'}
+          header={`Vehicles: ${(current.vehicles ?? [])
+            .map((x) => x.reg)
+            .join(', ')}`}
+        >
+          <VehiclesList
+            vehicles={current.vehicles ?? []}
+            onChange={(v) =>
+              personContext.update({
+                ...current,
+                vehicles: v
+              })
+            }
           />
         </Panel>
       </Collapse>

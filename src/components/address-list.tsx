@@ -1,6 +1,6 @@
 import { AddressesItem } from '../auto-gen/interfaces';
 import { Address } from './address';
-import { Button, Card, Collapse, PageHeader } from 'antd';
+import { Button, Collapse, PageHeader } from 'antd';
 import { useState } from 'react';
 import { Flex } from './flex';
 import {
@@ -30,7 +30,7 @@ export const AddressList = (props: AddressListProps) => {
   };
 
   return (
-    <Card>
+    <>
       <PageHeader
         title='Addresses'
         extra={[
@@ -94,6 +94,6 @@ export const AddressList = (props: AddressListProps) => {
           </Panel>
         ))}
       </Collapse>
-    </Card>
+    </>
   );
 };
