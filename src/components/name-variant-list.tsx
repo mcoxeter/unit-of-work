@@ -1,53 +1,54 @@
-import { AddressesItem } from '../auto-gen/interfaces';
-import { Address } from './address';
-import { Button, Collapse, PageHeader } from 'antd';
-import { useState } from 'react';
-import { Flex } from './flex';
 import {
   DeleteOutlined,
   DownOutlined,
   PlusOutlined,
   UpOutlined
 } from '@ant-design/icons';
+import { Button, Collapse, PageHeader } from 'antd';
+import { useState } from 'react';
+import { NameVariantsItem } from '../auto-gen/interfaces';
+import { Flex } from './flex';
 import { down, up } from '../array-utils';
-const { Panel } = Collapse;
-
-export interface AddressListProps {
-  addresses: AddressesItem[];
-  onChange: (addresses: AddressesItem[]) => void;
+import { NameVariant } from './name-variant';
+export interface NameVariantListProps {
+  nameVariants: NameVariantsItem[];
+  nameVariantTypes: string[];
+  onChange: (value: NameVariantsItem[]) => void;
 }
-export const AddressList = (props: AddressListProps) => {
+
+const { Panel } = Collapse;
+export const NameVariantList = (props: NameVariantListProps) => {
   const upActive = (i: number) => i > 0;
-  const downActive = (i: number) => i < props.addresses.length - 1;
+  const downActive = (i: number) => i < props.nameVariants.length - 1;
+  const newItem: NameVariantsItem = {
+    forename: '',
+    surname: '',
+    type: ''
+  };
 
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
-  const newItem: AddressesItem = {
-    street1: '',
-    street2: '',
-    postcode: '',
-    city: '',
-    country: ''
-  };
+
+  const nameVariants = props.nameVariants;
 
   return (
     <>
       <PageHeader
-        title='Addresses'
+        title='NameVariants'
         extra={[
           <Button
             icon={<PlusOutlined />}
             type='dashed'
-            onClick={() => props.onChange(props.addresses.concat(newItem))}
+            onClick={() => props.onChange(nameVariants.concat(newItem))}
           >
             Add
           </Button>
         ]}
       ></PageHeader>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
-        {props.addresses.map((address, i) => (
+        {props.nameVariants.map((nameVariant, i) => (
           <Panel
             key={'Address' + i}
-            header={address.street1}
+            header={`${nameVariant.forename} ${nameVariant.surname}`}
             extra={[
               <Flex>
                 <Button
@@ -56,7 +57,7 @@ export const AddressList = (props: AddressListProps) => {
                   disabled={!upActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(up(props.addresses, i));
+                    props.onChange(up(nameVariants, i));
                   }}
                 />
                 <Button
@@ -65,7 +66,7 @@ export const AddressList = (props: AddressListProps) => {
                   disabled={!downActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(down(props.addresses, i));
+                    props.onChange(down(nameVariants, i));
                   }}
                 />
                 <Button
@@ -74,20 +75,19 @@ export const AddressList = (props: AddressListProps) => {
                   icon={<DeleteOutlined />}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(props.addresses.filter((_, _i) => i !== _i));
+                    props.onChange(nameVariants.filter((_, _i) => i !== _i));
                   }}
                 />
               </Flex>
             ]}
           >
-            <Address
+            <NameVariant
               key={i}
-              address={address}
+              nameVariant={nameVariant}
+              nameVariantTypes={props.nameVariantTypes}
               onChange={(changedAddress) => {
                 return props.onChange(
-                  props.addresses.map((_x, _i) =>
-                    _i === i ? changedAddress : _x
-                  )
+                  nameVariants.map((_x, _i) => (_i === i ? changedAddress : _x))
                 );
               }}
             />

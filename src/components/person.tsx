@@ -1,4 +1,3 @@
-import { AddressesItem } from '../auto-gen/interfaces';
 import {
   Button,
   Card,
@@ -7,18 +6,27 @@ import {
   Form,
   Input,
   PageHeader,
-  Progress
+  Progress,
+  Select,
+  Tag,
+  Typography
 } from 'antd';
-import { AddressList } from './address-list';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../services/person-context';
 import moment from 'moment';
 import { UserOutlined } from '@ant-design/icons';
-import { VehiclesList } from './vehicles-list';
+import { useCountries } from '../services/useCountrys';
+import { useNameVariantTypes } from '../services/useNameVariantTypes';
+import { NameVariantList } from './name-variant-list';
+import { Flex } from './flex';
 const { Panel } = Collapse;
+const { Option } = Select;
+const { Text } = Typography;
 
 export const Person = () => {
+  const countries: string[] = useCountries();
   const personContext = useContext(PersonContext);
+  const nameVariantTypes = useNameVariantTypes();
   const [activePanels, setActivePanels] = useState<string[] | string>([
     'Personal details'
   ]);
@@ -27,11 +35,6 @@ export const Person = () => {
   if (current === undefined) {
     return null;
   }
-
-  const addressesReducer = (addresses: AddressesItem[]) => ({
-    ...current,
-    addresses
-  });
 
   const isModified = personContext.isModified();
 
@@ -68,7 +71,12 @@ export const Person = () => {
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
         <Panel
           key={'Personal details'}
-          header={`${current.forename} ${current.surname}`}
+          header={`Personal details`}
+          extra={[
+            <Tag color='success'>
+              {current.forename} {current.surname}
+            </Tag>
+          ]}
         >
           <Form.Item label='Forename'>
             <Input
@@ -88,18 +96,31 @@ export const Person = () => {
               }
             ></Input>
           </Form.Item>
-          <Form.Item label='Age'>
-            <Input
-              type={'number'}
-              value={current.age}
-              onChange={(v) =>
-                personContext.update({
-                  ...current,
-                  age: Number(v.target.value)
-                })
+          <Form.Item label='Gender'>
+            <Select
+              showSearch
+              value={current.gender}
+              style={{ width: 200 }}
+              placeholder='Search to Select'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option!.children as unknown as string).includes(input)
               }
-            ></Input>
+              filterSort={(optionA, optionB) =>
+                (optionA!.children as unknown as string)
+                  .toLowerCase()
+                  .localeCompare(
+                    (optionB!.children as unknown as string).toLowerCase()
+                  )
+              }
+              onChange={(v) => personContext.update({ ...current, gender: v })}
+            >
+              <Option value='Male'>Male</Option>
+              <Option value='Female'>Female</Option>
+              <Option value='Unknown'>Unknown</Option>
+            </Select>
           </Form.Item>
+
           <Form.Item label='Date of Birth'>
             <DatePicker
               allowClear={false}
@@ -109,31 +130,54 @@ export const Person = () => {
               }
             />
           </Form.Item>
+          <Form.Item label='Nationality'>
+            <Select
+              showSearch
+              value={current.nationality}
+              style={{ width: 200 }}
+              placeholder='Search to Select'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option!.children as unknown as string).includes(input)
+              }
+              filterSort={(optionA, optionB) =>
+                (optionA!.children as unknown as string)
+                  .toLowerCase()
+                  .localeCompare(
+                    (optionB!.children as unknown as string).toLowerCase()
+                  )
+              }
+              onChange={(v) =>
+                personContext.update({ ...current, nationality: v })
+              }
+            >
+              {countries.map((x) => (
+                <Option key={x} value={x}>
+                  {x}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
         </Panel>
         <Panel
-          key={'Address List'}
-          header={`Addresses: ${(current.addresses ?? [])
-            .map((x) => x.street1)
-            .join(', ')}`}
+          key={'Name Variant List'}
+          header={'Name Variants'}
+          extra={(current.nameVariants ?? []).map((x, i) => {
+            return (
+              <Flex>
+                <Text>
+                  {x.forename} {x.surname}
+                </Text>
+                {x.type && <Tag color='success'>{x.type}</Tag>}
+              </Flex>
+            );
+          })}
         >
-          <AddressList
-            addresses={current.addresses ?? []}
-            onChange={(v) => personContext.update(addressesReducer(v))}
-          />
-        </Panel>
-        <Panel
-          key={'Vehicle List'}
-          header={`Vehicles: ${(current.vehicles ?? [])
-            .map((x) => x.reg)
-            .join(', ')}`}
-        >
-          <VehiclesList
-            vehicles={current.vehicles ?? []}
+          <NameVariantList
+            nameVariants={current.nameVariants}
+            nameVariantTypes={nameVariantTypes}
             onChange={(v) =>
-              personContext.update({
-                ...current,
-                vehicles: v
-              })
+              personContext.update({ ...current, nameVariants: v })
             }
           />
         </Panel>
