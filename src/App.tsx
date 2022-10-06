@@ -1,7 +1,7 @@
 import './App.css';
 import 'antd/dist/antd.css';
 import { PersonContextProvider } from './services/person-context-provider';
-import { Person } from './components/person';
+import { Person } from './components/person/person';
 import { Layout, Menu } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';

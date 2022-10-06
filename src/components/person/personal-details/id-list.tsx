@@ -6,49 +6,49 @@ import {
 } from '@ant-design/icons';
 import { Button, Collapse, PageHeader } from 'antd';
 import { useState } from 'react';
-import { NameVariantsItem } from '../auto-gen/interfaces';
-import { Flex } from './flex';
-import { down, up } from '../array-utils';
-import { NameVariant } from './name-variant';
-export interface NameVariantListProps {
-  nameVariants: NameVariantsItem[];
-  nameVariantTypes: string[];
-  onChange: (value: NameVariantsItem[]) => void;
+import { down, up } from '../../../array-utils';
+import { PersonIdItem } from '../../../auto-gen/interfaces';
+import { Flex } from '../../flex';
+import { Id } from './id';
+export interface IdListProps {
+  ids: PersonIdItem[];
+  idTypes: string[];
+  onChange: (value: PersonIdItem[]) => void;
 }
 
 const { Panel } = Collapse;
-export const NameVariantList = (props: NameVariantListProps) => {
+export const IdList = (props: IdListProps) => {
   const upActive = (i: number) => i > 0;
-  const downActive = (i: number) => i < props.nameVariants.length - 1;
-  const newItem: NameVariantsItem = {
-    forename: '',
-    surname: '',
-    type: ''
+  const downActive = (i: number) => i < props.ids.length - 1;
+  const newId: PersonIdItem = {
+    type: '',
+    id: '',
+    verificationStatus: ''
   };
 
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
 
-  const nameVariants = props.nameVariants;
+  const ids = props.ids;
 
   return (
     <>
       <PageHeader
-        title='NameVariants'
+        title='IDs'
         extra={[
           <Button
             icon={<PlusOutlined />}
             type='dashed'
-            onClick={() => props.onChange(nameVariants.concat(newItem))}
+            onClick={() => props.onChange(ids.concat(newId))}
           >
             Add
           </Button>
         ]}
       ></PageHeader>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
-        {props.nameVariants.map((nameVariant, i) => (
+        {props.ids.map((id, i) => (
           <Panel
             key={'Address' + i}
-            header={`${nameVariant.forename} ${nameVariant.surname}`}
+            header={`${id.id} ${id.type}`}
             extra={[
               <Flex>
                 <Button
@@ -57,7 +57,7 @@ export const NameVariantList = (props: NameVariantListProps) => {
                   disabled={!upActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(up(nameVariants, i));
+                    props.onChange(up(ids, i));
                   }}
                 />
                 <Button
@@ -66,7 +66,7 @@ export const NameVariantList = (props: NameVariantListProps) => {
                   disabled={!downActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(down(nameVariants, i));
+                    props.onChange(down(ids, i));
                   }}
                 />
                 <Button
@@ -75,19 +75,19 @@ export const NameVariantList = (props: NameVariantListProps) => {
                   icon={<DeleteOutlined />}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(nameVariants.filter((_, _i) => i !== _i));
+                    props.onChange(ids.filter((_, _i) => i !== _i));
                   }}
                 />
               </Flex>
             ]}
           >
-            <NameVariant
+            <Id
               key={i}
-              nameVariant={nameVariant}
-              nameVariantTypes={props.nameVariantTypes}
-              onChange={(changedAddress) => {
+              id={id}
+              idTypes={props.idTypes}
+              onChange={(value) => {
                 return props.onChange(
-                  nameVariants.map((_x, _i) => (_i === i ? changedAddress : _x))
+                  ids.map((_x, _i) => (_i === i ? value : _x))
                 );
               }}
             />

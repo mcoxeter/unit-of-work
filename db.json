@@ -17,16 +17,15 @@
           "type": "Default publishing name",
           "forename": "Michael",
           "surname": "Coxeter"
-        },
-        {
-          "forename": "Mìk€",
-          "surname": "",
-          "type": "Translated name"
         }
       ],
       "titles": [
         {
-          "type": "Academic degree",
+          "title": "Master Jester",
+          "type": "Post-nominal title"
+        },
+        {
+          "type": "Honorary title",
           "title": "Master in Political Science"
         }
       ],

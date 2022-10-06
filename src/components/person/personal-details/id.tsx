@@ -1,41 +1,37 @@
-import { Card, Form, Input, Select } from 'antd';
-import { NameVariantsItem } from '../auto-gen/interfaces';
+import { Form, Input, Select } from 'antd';
+import { PersonIdItem } from '../../../auto-gen/interfaces';
 
 const { Option } = Select;
 
-export interface NameVariantProps {
-  nameVariant: NameVariantsItem;
-  nameVariantTypes: string[];
-  onChange: (value: NameVariantsItem) => void;
+export interface IdProps {
+  id: PersonIdItem;
+  idTypes: string[];
+  onChange: (value: PersonIdItem) => void;
 }
 
-export const NameVariant = (props: NameVariantProps) => {
-  const nameVariant = props.nameVariant;
+export const Id = (props: IdProps) => {
+  const id = props.id;
 
   return (
-    <Card title='Name Variant' actions={[]}>
+    <>
       <Form.Item label='Forename'>
         <Input
           type={'text'}
-          value={nameVariant.forename}
-          onChange={(v) =>
-            props.onChange({ ...nameVariant, forename: v.target.value })
-          }
+          value={id.id}
+          onChange={(v) => props.onChange({ ...id, id: v.target.value })}
         />
       </Form.Item>
       <Form.Item label='Surname'>
         <Input
           type={'text'}
-          value={nameVariant.surname}
-          onChange={(v) =>
-            props.onChange({ ...nameVariant, surname: v.target.value })
-          }
+          value={id.type}
+          onChange={(v) => props.onChange({ ...id, type: v.target.value })}
         />
       </Form.Item>
       <Form.Item label='Type'>
         <Select
           showSearch
-          value={nameVariant.type}
+          value={id.type}
           style={{ width: 200 }}
           placeholder='Search to Select'
           optionFilterProp='children'
@@ -49,15 +45,15 @@ export const NameVariant = (props: NameVariantProps) => {
                 (optionB!.children as unknown as string).toLowerCase()
               )
           }
-          onChange={(v) => props.onChange({ ...nameVariant, type: v })}
+          onChange={(v) => props.onChange({ ...id, type: v })}
         >
-          {props.nameVariantTypes.map((x) => (
+          {props.idTypes.map((x) => (
             <Option key={x} value={x}>
               {x}
             </Option>
           ))}
         </Select>
       </Form.Item>
-    </Card>
+    </>
   );
 };
