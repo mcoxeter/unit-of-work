@@ -14,7 +14,11 @@ export const PersonHeader = () => {
   return (
     <PageHeader
       title='Person'
-      avatar={{ size: 64, icon: <UserOutlined /> }}
+      avatar={{
+        size: 64,
+        icon: <UserOutlined />,
+        src: 'http://localhost:4000/static/michael coxeter.jpg'
+      }}
       subTitle={`${current.forename} ${current.surname}`}
       extra={[
         <Button

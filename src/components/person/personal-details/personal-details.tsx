@@ -15,6 +15,7 @@ import { useNameVariantTypes } from '../../../services/useNameVariantTypes';
 import { useTitleTypes } from '../../../services/useTitleTypes';
 import { IdList } from './id-list';
 import { NameVariantList } from './name-variant-list';
+import { OrcidIDList } from './orcid-id-list';
 import { TitleList } from './title-list';
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -162,6 +163,20 @@ export const PersonalDetails = () => {
             ids={current.personId}
             idTypes={[]}
             onChange={(v) => personContext.update({ ...current, personId: v })}
+          />
+        </Panel>
+        <Panel
+          key={'orcidID-list'}
+          header={`Orcid IDs`}
+          extra={current.orcidId.map((v) => (
+            <>
+              <Tag color='processing'>{v}</Tag>{' '}
+            </>
+          ))}
+        >
+          <OrcidIDList
+            orcidIDs={current.orcidId}
+            onChange={(v) => personContext.update({ ...current, orcidId: v })}
           />
         </Panel>
       </Collapse>

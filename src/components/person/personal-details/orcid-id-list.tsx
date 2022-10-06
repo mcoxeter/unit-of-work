@@ -7,43 +7,36 @@ import {
 import { Button, Collapse } from 'antd';
 import { useState } from 'react';
 import { down, up } from '../../../array-utils';
-import { PersonIdItem } from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
-import { Id } from './id';
-export interface IdListProps {
-  ids: PersonIdItem[];
-  idTypes: string[];
-  onChange: (value: PersonIdItem[]) => void;
+import { OrcidID } from './orcid-id';
+export interface OrcidIDListProps {
+  orcidIDs: string[];
+  onChange: (value: string[]) => void;
 }
 
 const { Panel } = Collapse;
-export const IdList = (props: IdListProps) => {
+export const OrcidIDList = (props: OrcidIDListProps) => {
   const upActive = (i: number) => i > 0;
-  const downActive = (i: number) => i < props.ids.length - 1;
-  const newId: PersonIdItem = {
-    type: '',
-    id: '',
-    verificationStatus: ''
-  };
+  const downActive = (i: number) => i < props.orcidIDs.length - 1;
 
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
 
-  const ids = props.ids;
+  const orcidIDs = props.orcidIDs;
 
   return (
     <Flex direction='Column'>
       <Button
         icon={<PlusOutlined />}
         type='dashed'
-        onClick={() => props.onChange(ids.concat(newId))}
+        onClick={() => props.onChange(orcidIDs.concat(''))}
       >
         Add
       </Button>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
-        {props.ids.map((id, i) => (
+        {props.orcidIDs.map((orcidID, i) => (
           <Panel
-            key={'Id' + i}
-            header={`${id.id} ${id.type}`}
+            key={i}
+            header={`${orcidID}`}
             extra={[
               <Flex>
                 <Button
@@ -52,7 +45,7 @@ export const IdList = (props: IdListProps) => {
                   disabled={!upActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(up(ids, i));
+                    props.onChange(up(orcidIDs, i));
                   }}
                 />
                 <Button
@@ -61,7 +54,7 @@ export const IdList = (props: IdListProps) => {
                   disabled={!downActive(i)}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(down(ids, i));
+                    props.onChange(down(orcidIDs, i));
                   }}
                 />
                 <Button
@@ -70,19 +63,18 @@ export const IdList = (props: IdListProps) => {
                   icon={<DeleteOutlined />}
                   onClick={(e) => {
                     e.stopPropagation();
-                    props.onChange(ids.filter((_, _i) => i !== _i));
+                    props.onChange(orcidIDs.filter((_, _i) => i !== _i));
                   }}
                 />
               </Flex>
             ]}
           >
-            <Id
+            <OrcidID
               key={i}
-              id={id}
-              idTypes={props.idTypes}
+              orcidID={orcidID}
               onChange={(value) => {
                 return props.onChange(
-                  ids.map((_x, _i) => (_i === i ? value : _x))
+                  orcidIDs.map((_x, _i) => (_i === i ? value : _x))
                 );
               }}
             />
