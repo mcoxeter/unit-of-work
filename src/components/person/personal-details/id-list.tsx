@@ -4,7 +4,7 @@ import {
   PlusOutlined,
   UpOutlined
 } from '@ant-design/icons';
-import { Button, Collapse, PageHeader } from 'antd';
+import { Button, Collapse } from 'antd';
 import { useState } from 'react';
 import { down, up } from '../../../array-utils';
 import { PersonIdItem } from '../../../auto-gen/interfaces';
@@ -31,19 +31,14 @@ export const IdList = (props: IdListProps) => {
   const ids = props.ids;
 
   return (
-    <>
-      <PageHeader
-        title='IDs'
-        extra={[
-          <Button
-            icon={<PlusOutlined />}
-            type='dashed'
-            onClick={() => props.onChange(ids.concat(newId))}
-          >
-            Add
-          </Button>
-        ]}
-      ></PageHeader>
+    <Flex direction='Column'>
+      <Button
+        icon={<PlusOutlined />}
+        type='dashed'
+        onClick={() => props.onChange(ids.concat(newId))}
+      >
+        Add
+      </Button>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
         {props.ids.map((id, i) => (
           <Panel
@@ -94,6 +89,6 @@ export const IdList = (props: IdListProps) => {
           </Panel>
         ))}
       </Collapse>
-    </>
+    </Flex>
   );
 };

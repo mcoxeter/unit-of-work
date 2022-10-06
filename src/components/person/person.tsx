@@ -1,9 +1,10 @@
-import { Card, Collapse, Tag } from 'antd';
+import { Card, Collapse, Typography } from 'antd';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../../services/person-context';
 import { PersonHeader } from './person-header';
 import { PersonalDetails } from './personal-details/personal-details';
 const { Panel } = Collapse;
+const { Text } = Typography;
 export const Person = () => {
   const personContext = useContext(PersonContext);
 
@@ -24,9 +25,9 @@ export const Person = () => {
           key={'Personal details'}
           header={`Personal details`}
           extra={[
-            <Tag color='success'>
+            <Text>
               {current.forename} {current.surname}
-            </Tag>
+            </Text>
           ]}
         >
           <PersonalDetails />

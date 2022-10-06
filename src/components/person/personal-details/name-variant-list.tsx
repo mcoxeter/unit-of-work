@@ -4,7 +4,7 @@ import {
   PlusOutlined,
   UpOutlined
 } from '@ant-design/icons';
-import { Button, Collapse, PageHeader } from 'antd';
+import { Button, Collapse } from 'antd';
 import { useState } from 'react';
 import { NameVariantsItem } from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
@@ -31,19 +31,14 @@ export const NameVariantList = (props: NameVariantListProps) => {
   const nameVariants = props.nameVariants;
 
   return (
-    <>
-      <PageHeader
-        title='NameVariants'
-        extra={[
-          <Button
-            icon={<PlusOutlined />}
-            type='dashed'
-            onClick={() => props.onChange(nameVariants.concat(newItem))}
-          >
-            Add
-          </Button>
-        ]}
-      ></PageHeader>
+    <Flex direction='Column'>
+      <Button
+        icon={<PlusOutlined />}
+        type='dashed'
+        onClick={() => props.onChange(nameVariants.concat(newItem))}
+      >
+        Add
+      </Button>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
         {props.nameVariants.map((nameVariant, i) => (
           <Panel
@@ -94,6 +89,6 @@ export const NameVariantList = (props: NameVariantListProps) => {
           </Panel>
         ))}
       </Collapse>
-    </>
+    </Flex>
   );
 };

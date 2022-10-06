@@ -2,21 +2,21 @@
   "persons": [
     {
       "id": 1234,
-      "forename": "Michael John",
+      "forename": "Michael John Maxwell",
       "surname": "Coxeter",
       "gender": "Male",
       "dob": "1966-08-15T09:44:04.057Z",
       "nationality": "United Kingdom",
       "nameVariants": [
         {
-          "forename": "M.",
-          "surname": "Coxeter",
-          "type": "Sort name"
-        },
-        {
           "type": "Default publishing name",
           "forename": "Michael",
           "surname": "Coxeter"
+        },
+        {
+          "forename": "M.",
+          "surname": "Coxeter",
+          "type": "Former name"
         }
       ],
       "titles": [

@@ -4,7 +4,7 @@ import {
   PlusOutlined,
   UpOutlined
 } from '@ant-design/icons';
-import { Button, Collapse, PageHeader } from 'antd';
+import { Button, Collapse } from 'antd';
 import { useState } from 'react';
 import { TitlesItem } from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
@@ -30,19 +30,14 @@ export const TitleList = (props: TitleListProps) => {
   const titles = props.titles;
 
   return (
-    <>
-      <PageHeader
-        title='Titles'
-        extra={[
-          <Button
-            icon={<PlusOutlined />}
-            type='dashed'
-            onClick={() => props.onChange(titles.concat(newItem))}
-          >
-            Add
-          </Button>
-        ]}
-      ></PageHeader>
+    <Flex direction='Column'>
+      <Button
+        icon={<PlusOutlined />}
+        type='dashed'
+        onClick={() => props.onChange(titles.concat(newItem))}
+      >
+        Add
+      </Button>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
         {props.titles.map((title, i) => (
           <Panel
@@ -93,6 +88,6 @@ export const TitleList = (props: TitleListProps) => {
           </Panel>
         ))}
       </Collapse>
-    </>
+    </Flex>
   );
 };
