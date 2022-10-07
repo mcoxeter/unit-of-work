@@ -1,14 +1,9 @@
-import {
-  DeleteOutlined,
-  DownOutlined,
-  PlusOutlined,
-  UpOutlined
-} from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { Button, Collapse } from 'antd';
 import { useState } from 'react';
 import { TitlesItem } from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
-import { down, up } from '../../../array-utils';
+import { ListOrderControl } from '../../list-order-control';
 import { Title } from './title';
 export interface TitleListProps {
   titles: TitlesItem[];
@@ -18,8 +13,6 @@ export interface TitleListProps {
 
 const { Panel } = Collapse;
 export const TitleList = (props: TitleListProps) => {
-  const upActive = (i: number) => i > 0;
-  const downActive = (i: number) => i < props.titles.length - 1;
   const newItem: TitlesItem = {
     title: '',
     type: ''
@@ -43,37 +36,13 @@ export const TitleList = (props: TitleListProps) => {
           <Panel
             key={'Address' + i}
             header={`${title.title}`}
-            extra={[
-              <Flex>
-                <Button
-                  type='default'
-                  icon={<UpOutlined />}
-                  disabled={!upActive(i)}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onChange(up(titles, i));
-                  }}
-                />
-                <Button
-                  type='default'
-                  icon={<DownOutlined />}
-                  disabled={!downActive(i)}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onChange(down(titles, i));
-                  }}
-                />
-                <Button
-                  type='default'
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onChange(titles.filter((_, _i) => i !== _i));
-                  }}
-                />
-              </Flex>
-            ]}
+            extra={
+              <ListOrderControl
+                index={i}
+                values={titles}
+                onChange={props.onChange}
+              />
+            }
           >
             <Title
               key={i}

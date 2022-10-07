@@ -1,14 +1,9 @@
-import {
-  DeleteOutlined,
-  DownOutlined,
-  PlusOutlined,
-  UpOutlined
-} from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import { Button, Collapse } from 'antd';
 import { useState } from 'react';
-import { down, up } from '../../../array-utils';
 import { PersonIdItem } from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
+import { ListOrderControl } from '../../list-order-control';
 import { Id } from './id';
 export interface IdListProps {
   ids: PersonIdItem[];
@@ -18,8 +13,6 @@ export interface IdListProps {
 
 const { Panel } = Collapse;
 export const IdList = (props: IdListProps) => {
-  const upActive = (i: number) => i > 0;
-  const downActive = (i: number) => i < props.ids.length - 1;
   const newId: PersonIdItem = {
     type: '',
     id: '',
@@ -44,37 +37,13 @@ export const IdList = (props: IdListProps) => {
           <Panel
             key={'Id' + i}
             header={`${id.id} ${id.type}`}
-            extra={[
-              <Flex>
-                <Button
-                  type='default'
-                  icon={<UpOutlined />}
-                  disabled={!upActive(i)}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onChange(up(ids, i));
-                  }}
-                />
-                <Button
-                  type='default'
-                  icon={<DownOutlined />}
-                  disabled={!downActive(i)}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onChange(down(ids, i));
-                  }}
-                />
-                <Button
-                  type='default'
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    props.onChange(ids.filter((_, _i) => i !== _i));
-                  }}
-                />
-              </Flex>
-            ]}
+            extra={
+              <ListOrderControl
+                index={i}
+                values={ids}
+                onChange={props.onChange}
+              />
+            }
           >
             <Id
               key={i}
