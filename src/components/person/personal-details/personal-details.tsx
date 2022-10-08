@@ -1,8 +1,10 @@
 import {
+  Col,
   Collapse,
   DatePicker,
   Form,
   Input,
+  Row,
   Select,
   Tag,
   Typography
@@ -34,108 +36,116 @@ export const PersonalDetails = () => {
   }
   return (
     <>
-      <Form.Item label='Forename'>
-        <Input
-          type={'text'}
-          value={current.forename}
-          onChange={(v) => {
-            personContext.update({ ...current, forename: v.target.value });
-          }}
-        />
-      </Form.Item>
-      <Form.Item label='Surname'>
-        <Input
-          type={'text'}
-          value={current.surname}
-          onChange={(v) =>
-            personContext.update({ ...current, surname: v.target.value })
-          }
-        ></Input>
-      </Form.Item>
-      <Form.Item label='Gender'>
-        <Select
-          showSearch
-          value={current.gender}
-          style={{ width: 200 }}
-          placeholder='Search to Select'
-          optionFilterProp='children'
-          filterOption={(input, option) =>
-            (option!.children as unknown as string).includes(input)
-          }
-          filterSort={(optionA, optionB) =>
-            (optionA!.children as unknown as string)
-              .toLowerCase()
-              .localeCompare(
-                (optionB!.children as unknown as string).toLowerCase()
-              )
-          }
-          onChange={(v) => personContext.update({ ...current, gender: v })}
-        >
-          <Option value='Male'>Male</Option>
-          <Option value='Female'>Female</Option>
-          <Option value='Unknown'>Unknown</Option>
-        </Select>
-      </Form.Item>
-
-      <Form.Item label='Date of Birth'>
-        <DatePicker
-          allowClear={false}
-          value={moment(current.dob)}
-          onChange={(v) =>
-            personContext.update({ ...current, dob: v?.toJSON() ?? '' })
-          }
-        />
-      </Form.Item>
-      <Form.Item label='Nationality'>
-        <Select
-          showSearch
-          value={current.nationality}
-          style={{ width: 200 }}
-          placeholder='Search to Select'
-          optionFilterProp='children'
-          filterOption={(input, option) =>
-            (option!.children as unknown as string).includes(input)
-          }
-          filterSort={(optionA, optionB) =>
-            (optionA!.children as unknown as string)
-              .toLowerCase()
-              .localeCompare(
-                (optionB!.children as unknown as string).toLowerCase()
-              )
-          }
-          onChange={(v) => personContext.update({ ...current, nationality: v })}
-        >
-          {countries.map((x) => (
-            <Option key={x} value={x}>
-              {x}
-            </Option>
-          ))}
-        </Select>
-      </Form.Item>
-      <Form.Item label='Start date as independent researched'>
-        <DatePicker
-          allowClear={false}
-          value={moment(current.startDateAsIndependentResearcher)}
-          onChange={(v) =>
-            personContext.update({
-              ...current,
-              startDateAsIndependentResearcher: v?.toJSON() ?? ''
-            })
-          }
-        />
-      </Form.Item>
-      <Form.Item label='Retirement date'>
-        <DatePicker
-          allowClear={false}
-          value={moment(current.retirementDate)}
-          onChange={(v) =>
-            personContext.update({
-              ...current,
-              retirementDate: v?.toJSON() ?? ''
-            })
-          }
-        />
-      </Form.Item>
+      <Row gutter={12}>
+        <Col span={12}>
+          <Form.Item label='Forename'>
+            <Input
+              type={'text'}
+              value={current.forename}
+              onChange={(v) => {
+                personContext.update({ ...current, forename: v.target.value });
+              }}
+            />
+          </Form.Item>
+          <Form.Item label='Surname'>
+            <Input
+              type={'text'}
+              value={current.surname}
+              onChange={(v) =>
+                personContext.update({ ...current, surname: v.target.value })
+              }
+            ></Input>
+          </Form.Item>
+          <Form.Item label='Gender'>
+            <Select
+              showSearch
+              value={current.gender}
+              style={{ width: 200 }}
+              placeholder='Search to Select'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option!.children as unknown as string).includes(input)
+              }
+              filterSort={(optionA, optionB) =>
+                (optionA!.children as unknown as string)
+                  .toLowerCase()
+                  .localeCompare(
+                    (optionB!.children as unknown as string).toLowerCase()
+                  )
+              }
+              onChange={(v) => personContext.update({ ...current, gender: v })}
+            >
+              <Option value='Male'>Male</Option>
+              <Option value='Female'>Female</Option>
+              <Option value='Unknown'>Unknown</Option>
+            </Select>
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          {' '}
+          <Form.Item label='Date of Birth'>
+            <DatePicker
+              allowClear={false}
+              value={moment(current.dob)}
+              onChange={(v) =>
+                personContext.update({ ...current, dob: v?.toJSON() ?? '' })
+              }
+            />
+          </Form.Item>
+          <Form.Item label='Nationality'>
+            <Select
+              showSearch
+              value={current.nationality}
+              style={{ width: 200 }}
+              placeholder='Search to Select'
+              optionFilterProp='children'
+              filterOption={(input, option) =>
+                (option!.children as unknown as string).includes(input)
+              }
+              filterSort={(optionA, optionB) =>
+                (optionA!.children as unknown as string)
+                  .toLowerCase()
+                  .localeCompare(
+                    (optionB!.children as unknown as string).toLowerCase()
+                  )
+              }
+              onChange={(v) =>
+                personContext.update({ ...current, nationality: v })
+              }
+            >
+              {countries.map((x) => (
+                <Option key={x} value={x}>
+                  {x}
+                </Option>
+              ))}
+            </Select>
+          </Form.Item>
+          <Form.Item label='Start date as independent researched'>
+            <DatePicker
+              allowClear={false}
+              value={moment(current.startDateAsIndependentResearcher)}
+              onChange={(v) =>
+                personContext.update({
+                  ...current,
+                  startDateAsIndependentResearcher: v?.toJSON() ?? ''
+                })
+              }
+            />
+          </Form.Item>
+          <Form.Item label='Retirement date'>
+            <DatePicker
+              allowClear={false}
+              value={moment(current.retirementDate)}
+              onChange={(v) =>
+                personContext.update({
+                  ...current,
+                  retirementDate: v?.toJSON() ?? ''
+                })
+              }
+            />
+          </Form.Item>
+        </Col>
+      </Row>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
         <Panel
           key={'variant-list'}
