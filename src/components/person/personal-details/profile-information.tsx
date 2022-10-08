@@ -1,4 +1,4 @@
-import { Form, Input, Select } from 'antd';
+import { Form, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { ProfileInformationItem } from '../../../auto-gen/interfaces';
 

@@ -29,6 +29,7 @@ export const PersonalDetails = () => {
   const nameVariantTypes = useGetArrayData('nameVariantTypes');
   const titleTypes = useGetArrayData('titleTypes');
   const linkTypes = useGetArrayData('linkTypes');
+  const profileInformationTypes = useGetArrayData('profileInformationTypes');
   const current = personContext.current();
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
 
@@ -240,7 +241,7 @@ export const PersonalDetails = () => {
         >
           <ProfileInformationList
             profileInformations={current.profileInformation}
-            profileInformationTypes={[]}
+            profileInformationTypes={profileInformationTypes}
             onChange={(v) =>
               personContext.update({ ...current, profileInformation: v })
             }
