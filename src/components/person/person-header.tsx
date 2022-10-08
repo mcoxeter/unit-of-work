@@ -2,6 +2,7 @@ import { UserOutlined } from '@ant-design/icons';
 import { PageHeader, Button, Progress } from 'antd';
 import { useContext } from 'react';
 import { PersonContext } from '../../services/person-context';
+import { Flex } from '../flex';
 
 export const PersonHeader = () => {
   const personContext = useContext(PersonContext);
@@ -21,7 +22,7 @@ export const PersonHeader = () => {
       }}
       subTitle={`${current.forename} ${current.surname}`}
       extra={
-        <>
+        <Flex>
           <Button
             type='primary'
             disabled={isModified === false}
@@ -29,7 +30,6 @@ export const PersonHeader = () => {
           >
             Save
           </Button>
-          ,
           <Button
             type='default'
             disabled={isModified === false}
@@ -37,14 +37,13 @@ export const PersonHeader = () => {
           >
             Restore
           </Button>
-          ,
           <Progress
             type='circle'
             format={() => (isModified ? 'Dirty' : 'Saved')}
             width={50}
             status={isModified ? 'exception' : 'success'}
           />
-        </>
+        </Flex>
       }
     ></PageHeader>
   );

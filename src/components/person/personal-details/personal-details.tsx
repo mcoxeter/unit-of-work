@@ -112,6 +112,30 @@ export const PersonalDetails = () => {
           ))}
         </Select>
       </Form.Item>
+      <Form.Item label='Start date as independent researched'>
+        <DatePicker
+          allowClear={false}
+          value={moment(current.startDateAsIndependentResearcher)}
+          onChange={(v) =>
+            personContext.update({
+              ...current,
+              startDateAsIndependentResearcher: v?.toJSON() ?? ''
+            })
+          }
+        />
+      </Form.Item>
+      <Form.Item label='Retirement date'>
+        <DatePicker
+          allowClear={false}
+          value={moment(current.retirementDate)}
+          onChange={(v) =>
+            personContext.update({
+              ...current,
+              retirementDate: v?.toJSON() ?? ''
+            })
+          }
+        />
+      </Form.Item>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
         <Panel
           key={'variant-list'}

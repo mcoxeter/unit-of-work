@@ -13,6 +13,7 @@ export const Flex = ({
       style={{
         display: 'flex',
         flexDirection: type === 'Row' ? 'row' : 'column',
+        alignItems: 'center',
         gap: `${gap}px`
       }}
     >
