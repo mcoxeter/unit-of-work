@@ -1,4 +1,4 @@
-import { Card, Collapse, Typography } from 'antd';
+import { Card, Collapse, Tag, Typography } from 'antd';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../../services/person-context';
 import { PersonHeader } from './person-header';
@@ -32,6 +32,16 @@ export const Person = () => {
         >
           <PersonalDetails />
         </Panel>
+        <Panel
+          key={'Ogranizational affilations'}
+          header={`Ogranizational affilations`}
+          extra={current.ogranizationalAffilations.affilations.map((x, i) => (
+            <span key={i}>
+              <Text>{x.affiliation} </Text>
+              <Tag color='processing'>{x.type}</Tag>
+            </span>
+          ))}
+        ></Panel>
       </Collapse>
     </Card>
   );
