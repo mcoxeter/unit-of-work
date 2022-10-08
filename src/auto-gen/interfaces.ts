@@ -2,7 +2,7 @@
 export type RootObject = {
     persons: PersonsItem[];
     company: CompanyItem[];
-    countrys: string[];
+    countries: string[];
     gendersTypes: string[];
     nameVariantTypes: string[];
     titleTypes: string[];
@@ -46,8 +46,8 @@ export type NameVariantsItem = {
     surname: string;
 };
 export type TitlesItem = {
-    type: string;
     title: string;
+    type: string;
 };
 export type PersonIdItem = {
     type: string;
@@ -61,7 +61,7 @@ export type ProfilePhotosItem = {
 export type LinksItem = {
     url: string;
     description: string;
-    linkType: string;
+    type: string;
 };
 export type ProfileInformationItem = {
     type: string;

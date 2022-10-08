@@ -10,10 +10,9 @@ import {
 import moment from 'moment';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../../../services/person-context';
-import { useCountries } from '../../../services/useCountrys';
-import { useNameVariantTypes } from '../../../services/useNameVariantTypes';
-import { useTitleTypes } from '../../../services/useTitleTypes';
+import { useGetArrayData } from '../../../services/useGetArrayData';
 import { IdList } from './id-list';
+import { LinkList } from './link-list';
 import { NameVariantList } from './name-variant-list';
 import { OrcidIDList } from './orcid-id-list';
 import { TitleList } from './title-list';
@@ -22,10 +21,11 @@ const { Panel } = Collapse;
 const { Text } = Typography;
 
 export const PersonalDetails = () => {
-  const countries: string[] = useCountries();
+  const countries = useGetArrayData('countries');
   const personContext = useContext(PersonContext);
-  const nameVariantTypes = useNameVariantTypes();
-  const titleTypes = useTitleTypes();
+  const nameVariantTypes = useGetArrayData('nameVariantTypes');
+  const titleTypes = useGetArrayData('titleTypes');
+  const linkTypes = useGetArrayData('linkTypes');
   const current = personContext.current();
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
 
@@ -116,13 +116,13 @@ export const PersonalDetails = () => {
         <Panel
           key={'variant-list'}
           header={'Variants'}
-          extra={current.nameVariants.map((v) => (
-            <>
+          extra={current.nameVariants.map((v, i) => (
+            <span key={i}>
               <Text>
                 {v.forename} {v.surname}{' '}
               </Text>
               <Tag color='processing'>{v.type}</Tag>
-            </>
+            </span>
           ))}
         >
           <NameVariantList
@@ -136,11 +136,11 @@ export const PersonalDetails = () => {
         <Panel
           key={'title-list'}
           header={`Titles`}
-          extra={current.titles.map((v) => (
-            <>
+          extra={current.titles.map((v, i) => (
+            <span key={i}>
               <Text>{v.title} </Text>
               <Tag color='processing'>{v.type}</Tag>
-            </>
+            </span>
           ))}
         >
           <TitleList
@@ -152,11 +152,11 @@ export const PersonalDetails = () => {
         <Panel
           key={'id-list'}
           header={`IDs`}
-          extra={current.personId.map((v) => (
-            <>
+          extra={current.personId.map((v, i) => (
+            <span key={i}>
               <Text>{v.id} </Text>
               <Tag color='processing'>{v.type}</Tag>
-            </>
+            </span>
           ))}
         >
           <IdList
@@ -168,15 +168,30 @@ export const PersonalDetails = () => {
         <Panel
           key={'orcidID-list'}
           header={`Orcid IDs`}
-          extra={current.orcidId.map((v) => (
-            <>
+          extra={current.orcidId.map((v, i) => (
+            <span key={i}>
               <Tag color='processing'>{v}</Tag>{' '}
-            </>
+            </span>
           ))}
         >
           <OrcidIDList
             orcidIDs={current.orcidId}
             onChange={(v) => personContext.update({ ...current, orcidId: v })}
+          />
+        </Panel>
+        <Panel
+          key={'link-list'}
+          header={`Links`}
+          extra={
+            <Tag color='processing'>{`${current.links.length} link${
+              current.links.length > 0 ? 's' : ''
+            }`}</Tag>
+          }
+        >
+          <LinkList
+            links={current.links}
+            linkTypes={linkTypes}
+            onChange={(v) => personContext.update({ ...current, links: v })}
           />
         </Panel>
       </Collapse>

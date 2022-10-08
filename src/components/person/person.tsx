@@ -24,11 +24,11 @@ export const Person = () => {
         <Panel
           key={'Personal details'}
           header={`Personal details`}
-          extra={[
+          extra={
             <Text>
               {current.forename} {current.surname}
             </Text>
-          ]}
+          }
         >
           <PersonalDetails />
         </Panel>

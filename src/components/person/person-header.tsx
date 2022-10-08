@@ -20,28 +20,32 @@ export const PersonHeader = () => {
         src: 'http://localhost:4000/static/michael coxeter.jpg'
       }}
       subTitle={`${current.forename} ${current.surname}`}
-      extra={[
-        <Button
-          type='primary'
-          disabled={isModified === false}
-          onClick={async () => await personContext.save()}
-        >
-          Save
-        </Button>,
-        <Button
-          type='default'
-          disabled={isModified === false}
-          onClick={() => personContext.rollback()}
-        >
-          Restore
-        </Button>,
-        <Progress
-          type='circle'
-          format={() => (isModified ? 'Dirty' : 'Saved')}
-          width={50}
-          status={isModified ? 'exception' : 'success'}
-        />
-      ]}
+      extra={
+        <>
+          <Button
+            type='primary'
+            disabled={isModified === false}
+            onClick={async () => await personContext.save()}
+          >
+            Save
+          </Button>
+          ,
+          <Button
+            type='default'
+            disabled={isModified === false}
+            onClick={() => personContext.rollback()}
+          >
+            Restore
+          </Button>
+          ,
+          <Progress
+            type='circle'
+            format={() => (isModified ? 'Dirty' : 'Saved')}
+            width={50}
+            status={isModified ? 'exception' : 'success'}
+          />
+        </>
+      }
     ></PageHeader>
   );
 };
