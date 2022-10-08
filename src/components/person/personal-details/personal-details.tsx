@@ -17,6 +17,7 @@ import { IdList } from './id-list';
 import { LinkList } from './link-list';
 import { NameVariantList } from './name-variant-list';
 import { OrcidIDList } from './orcid-id-list';
+import { ProfileInformationList } from './profile-information-list';
 import { TitleList } from './title-list';
 const { Option } = Select;
 const { Panel } = Collapse;
@@ -218,7 +219,7 @@ export const PersonalDetails = () => {
           header={`Links`}
           extra={
             <Tag color='processing'>{`${current.links.length} link${
-              current.links.length > 0 ? 's' : ''
+              current.links.length > 1 ? 's' : ''
             }`}</Tag>
           }
         >
@@ -226,6 +227,23 @@ export const PersonalDetails = () => {
             links={current.links}
             linkTypes={linkTypes}
             onChange={(v) => personContext.update({ ...current, links: v })}
+          />
+        </Panel>
+        <Panel
+          key={'profile-information'}
+          header={`Profile Information`}
+          extra={
+            <Tag color='processing'>{`${
+              current.profileInformation.length
+            } profile${current.profileInformation.length > 1 ? 's' : ''}`}</Tag>
+          }
+        >
+          <ProfileInformationList
+            profileInformations={current.profileInformation}
+            profileInformationTypes={[]}
+            onChange={(v) =>
+              personContext.update({ ...current, profileInformation: v })
+            }
           />
         </Panel>
       </Collapse>
