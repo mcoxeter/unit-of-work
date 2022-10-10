@@ -36,10 +36,7 @@
           "verificationStatus": "Verified"
         }
       ],
-      "orcidId": [
-        "0000-0002-1685-233x",
-        "1234-1234-1233-233x"
-      ],
+      "orcidId": ["0000-0002-1685-233x", "1234-1234-1233-233x"],
       "profilePhotos": [
         {
           "type": "Portrait",
@@ -61,27 +58,25 @@
           "text": "Software development, Game development and other."
         }
       ],
-      "ogranizationalAffilations": {
-        "startDateAtInstution": "",
+      "organizationalAffilations": {
+        "startDateAtInstution": "1966-08-15T09:44:04.057Z",
         "endDateAtInstution": "",
-        "fte": "0.00",
+        "fte": "0.01",
         "primary": 124356,
         "affilations": [
           {
             "id": 124356,
             "type": "Staff",
-            "affiliation": "Pure Academy",
+            "affiliation": 2,
             "employedAs": "No Value",
             "startDate": "2022-08-15T09:44:04.057Z",
             "endDate": "",
             "fte": "",
             "contractType": "No Value",
             "jobTitle": "No Value",
-            "JobDescription": "",
+            "jobDescription": "",
             "keywords": {
-              "exOfficio": [
-                "Board of Studies Chair"
-              ],
+              "exOfficio": ["Board of Studies Chair"],
               "grade": []
             },
             "physicalAddresses": [
@@ -99,15 +94,9 @@
               }
             ],
             "electronicAddresses": {
-              "phoneNumbers": [
-                "1232456"
-              ],
-              "emailAddresses": [
-                "mcoxeter@gamil.com"
-              ],
-              "webAddresses": [
-                "www.this.that"
-              ]
+              "phoneNumbers": ["1232456"],
+              "emailAddresses": ["mcoxeter@gamil.com"],
+              "webAddresses": ["www.this.that"]
             },
             "staffId": "12354"
           }
@@ -144,18 +133,9 @@
       ],
       "keywords": {
         "keywords": [],
-        "sdgs": [
-          "SDG1 - No Poverty",
-          "SDG 2 - Zero Hunger"
-        ]
+        "sdgs": ["SDG1 - No Poverty", "SDG 2 - Zero Hunger"]
       },
       "visibility": "Public - No restriction"
-    }
-  ],
-  "company": [
-    {
-      "id": "546546",
-      "name": "Elsevier"
     }
   ],
   "countries": [
@@ -353,11 +333,7 @@
     "Zambia",
     "Zimbabwe"
   ],
-  "gendersTypes": [
-    "Male",
-    "Female",
-    "Unknown"
-  ],
+  "gendersTypes": ["Male", "Female", "Unknown"],
   "nameVariantTypes": [
     "Default publishing name",
     "Former name",
@@ -377,10 +353,7 @@
     "Candidate for verification",
     "Candidate for removal"
   ],
-  "profilePhotosTypes": [
-    "Portait",
-    "Gallery"
-  ],
+  "profilePhotosTypes": ["Portait", "Gallery"],
   "linkTypes": [
     "No value",
     "Unspecified",
@@ -392,46 +365,37 @@
     "Twitter",
     "Portal multimedia"
   ],
-  "profileInformationTypes": [
-    "Research interests"
-  ],
+  "profileInformationTypes": ["Research interests"],
   "ogranizationalAffilationsTypes": [
     {
+      "id": 1,
       "name": "Pure Academy",
       "unit": "University"
     },
     {
+      "id": 2,
       "name": "Faculty of Health Science",
       "unit": "Faculity"
     },
     {
+      "id": 3,
       "name": "Faculty of Humanities",
       "unit": "Faculity"
     },
     {
+      "id": 4,
       "name": "Occupational Therapy",
       "unit": "Department"
     }
   ],
-  "employedAsTypes": [
-    "No value",
-    "Academic",
-    "Honorary"
-  ],
-  "contractTypes": [
-    "No value",
-    "Fixed-term",
-    "Open ended"
-  ],
+  "employedAsTypes": ["No value", "Academic", "Honorary"],
+  "contractTypes": ["No value", "Fixed-term", "Open ended"],
   "exOfficioTypes": [
     "Board of Studies Chair",
     "Departmental Research Committee Chair",
     "Deputy Head of Department"
   ],
-  "physicalAddressesTypes": [
-    "Visiting address",
-    "Postal address"
-  ],
+  "physicalAddressesTypes": ["Visiting address", "Postal address"],
   "sdgsTypes": [
     "SGD 1 - No Poverty",
     "SDG 2 - Zero Hunger",

@@ -1,0 +1,38 @@
+{
+  "person": {
+    "id": 1234,
+    "forename": "Michael John Maxwell",
+    "surname": "Coxeter",
+    "gender": "Male",
+    "dob": "1966-08-15T09:44:04.057Z",
+    "nationality": "United Kingdom",
+    "more": "..."
+  },
+  "clientValidationRules": [
+    {
+      "jsonPath": "dob",
+      "validations": [
+        {
+          "rule": "DATE_GT(var1)",
+          "vars": [{ "var1": "1900-01-01T00:00:00.001Z" }],
+          "message": "Invalid date selected, please select one after the year 1900."
+        }
+      ]
+    }
+  ],
+  "uiAdjustments": [
+    {
+      "jsonPath": "surname",
+      "adjustment": {
+        "type": "readonly",
+        "message": "Syncronized"
+      }
+    },
+    {
+      "jsonPath": "gender",
+      "adjustment": {
+        "type": "hidden"
+      }
+    }
+  ]
+}

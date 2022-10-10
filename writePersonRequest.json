@@ -1,0 +1,24 @@
+{
+  "person": {
+    "id": 1234,
+    "forename": "Michael John Maxwell",
+    "surname": "C",
+    "organizationalAffilations": {
+      "affilations": [
+        {
+          "externalOrgRef": -1,
+          "jobTitle": "No Value",
+          "jobDescription": "",
+          "more": "..."
+        }
+      ]
+    }
+  },
+  "externalOrganizations": [
+    {
+      "id": -1,
+      "name": "Pure Academy",
+      "unit": "University"
+    }
+  ]
+}

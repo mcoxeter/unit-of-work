@@ -1,6 +1,7 @@
 import { Card, Collapse, Tag, Typography } from 'antd';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../../services/person-context';
+import { OrgAffilations } from './organizational-affilations/organizational-affilations';
 import { PersonHeader } from './person-header';
 import { PersonalDetails } from './personal-details/personal-details';
 const { Panel } = Collapse;
@@ -35,13 +36,20 @@ export const Person = () => {
         <Panel
           key={'Ogranizational affilations'}
           header={`Ogranizational affilations`}
-          extra={current.ogranizationalAffilations.affilations.map((x, i) => (
+          extra={current.organizationalAffilations.affilations.map((x, i) => (
             <span key={i}>
               <Text>{x.affiliation} </Text>
               <Tag color='processing'>{x.type}</Tag>
             </span>
           ))}
-        ></Panel>
+        >
+          <OrgAffilations
+            organizationalAffilations={current.organizationalAffilations}
+            onChange={(v) =>
+              personContext.update({ ...current, organizationalAffilations: v })
+            }
+          />
+        </Panel>
       </Collapse>
     </Card>
   );

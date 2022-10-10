@@ -1,0 +1,24 @@
+{
+  "person": {
+    "serverValidationResponses": [
+      {
+        "jsonPath": "surname",
+        "message": "Minimum length of surname is 3 characters"
+      },
+      {
+        "JsonPath": "organizationalAffilations.affilations[0].jobTitle",
+        "message": "JobTitle of No Value is not allowed, please select another."
+      }
+    ]
+  },
+  "externalOrganizations": {
+    "serverValidationResponses": {
+      "jsonPath": "externalOrganizations[0].name",
+      "message": "Name is not unique. Please select another."
+    }
+  },
+  "operationResponse": {
+    "type": "Fail",
+    "message": "Validation errors"
+  }
+}

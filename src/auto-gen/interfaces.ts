@@ -34,7 +34,7 @@ export type PersonsItem = {
     startDateAsIndependentResearcher: string;
     retirementDate: string;
     profileInformation: ProfileInformationItem[];
-    ogranizationalAffilations: OgranizationalAffilations;
+    organizationalAffilations: OrganizationalAffilations;
     externalPositions: ExternalPositionsItem[];
     qualification: QualificationItem[];
     keywords: Keywords;
@@ -67,7 +67,7 @@ export type ProfileInformationItem = {
     type: string;
     text: string;
 };
-export type OgranizationalAffilations = {
+export type OrganizationalAffilations = {
     startDateAtInstution: string;
     endDateAtInstution: string;
     fte: string;
@@ -77,14 +77,14 @@ export type OgranizationalAffilations = {
 export type AffilationsItem = {
     id: number;
     type: string;
-    affiliation: string;
+    affiliation: number;
     employedAs: string;
     startDate: string;
     endDate: string;
     fte: string;
     contractType: string;
     jobTitle: string;
-    JobDescription: string;
+    jobDescription: string;
     keywords: Keywords;
     physicalAddresses: PhysicalAddressesItem[];
     electronicAddresses: ElectronicAddresses;
@@ -142,6 +142,7 @@ export type CompanyItem = {
     name: string;
 };
 export type OgranizationalAffilationsTypesItem = {
+    id: number;
     name: string;
     unit: string;
 };
