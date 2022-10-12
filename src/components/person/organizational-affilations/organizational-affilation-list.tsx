@@ -1,12 +1,16 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Collapse } from 'antd';
 import { useState } from 'react';
-import { AffilationsItem } from '../../../auto-gen/interfaces';
+import {
+  AffilationsItem,
+  ExternalOrganizationLookupItem
+} from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
 import { ListOrderControl } from '../../list-order-control';
 import { OrganizationalAffilation } from './organizational-affilation';
 export interface OrganizationAffilationListProps {
   affilations: AffilationsItem[];
+  externalOrganizationLookup: ExternalOrganizationLookupItem[];
   onChange: (value: AffilationsItem[]) => void;
 }
 
@@ -15,7 +19,13 @@ export const OrganizationAffilationList = (
   props: OrganizationAffilationListProps
 ) => {
   const newItem: AffilationsItem = {
-    affiliation: -1,
+    externalOrganizationRef: {
+      refId: -1,
+      new_value: {
+        name: '',
+        unit: ''
+      }
+    },
     contractType: '',
     electronicAddresses: {
       emailAddresses: [],
@@ -55,7 +65,11 @@ export const OrganizationAffilationList = (
         {affilations.map((affilation, i) => (
           <Panel
             key={'Affilation' + i}
-            header={`${affilation.affiliation}`}
+            header={`${
+              props.externalOrganizationLookup.find(
+                (x) => affilation.externalOrganizationRef.refId === x.id
+              )?.name ?? affilation.externalOrganizationRef.new_value.name
+            }`}
             extra={
               <ListOrderControl
                 index={i}
@@ -67,6 +81,7 @@ export const OrganizationAffilationList = (
             <OrganizationalAffilation
               key={i}
               affilationsItem={affilation}
+              externalOrganizationLookup={props.externalOrganizationLookup}
               onChange={(value) => {
                 return props.onChange(
                   affilations.map((_x, _i) => (_i === i ? value : _x))

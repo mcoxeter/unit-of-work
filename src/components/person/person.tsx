@@ -1,6 +1,8 @@
 import { Card, Collapse, Tag, Typography } from 'antd';
 import { useContext, useState } from 'react';
+import { ExternalOrganizationLookupItem } from '../../auto-gen/interfaces';
 import { PersonContext } from '../../services/person-context';
+import { useGetArrayData } from '../../services/useGetArrayData';
 import { OrgAffilations } from './organizational-affilations/organizational-affilations';
 import { PersonHeader } from './person-header';
 import { PersonalDetails } from './personal-details/personal-details';
@@ -8,6 +10,10 @@ const { Panel } = Collapse;
 const { Text } = Typography;
 export const Person = () => {
   const personContext = useContext(PersonContext);
+  const externalOrganizationLookup =
+    useGetArrayData<ExternalOrganizationLookupItem>(
+      'externalOrganizationLookup'
+    );
 
   const [activePanels, setActivePanels] = useState<string[] | string>([
     'Personal details'
@@ -36,15 +42,22 @@ export const Person = () => {
         <Panel
           key={'Ogranizational affilations'}
           header={`Ogranizational affilations`}
-          extra={current.organizationalAffilations.affilations.map((x, i) => (
-            <span key={i}>
-              <Text>{x.affiliation} </Text>
-              <Tag color='processing'>{x.type}</Tag>
-            </span>
-          ))}
+          extra={current.organizationalAffilations.affilations.map(
+            (item, i) => (
+              <span key={i}>
+                <Text>
+                  {externalOrganizationLookup.find(
+                    (lookup) => lookup.id === item.externalOrganizationRef.refId
+                  )?.name ?? item.externalOrganizationRef.new_value.name}{' '}
+                </Text>
+                <Tag color='processing'>{item.type}</Tag>
+              </span>
+            )
+          )}
         >
           <OrgAffilations
             organizationalAffilations={current.organizationalAffilations}
+            externalOrganizationLookup={externalOrganizationLookup}
             onChange={(v) =>
               personContext.update({ ...current, organizationalAffilations: v })
             }

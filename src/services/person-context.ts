@@ -8,6 +8,8 @@ export interface IPersonContext {
   current(): PersonsItem | undefined;
   original(): PersonsItem | undefined;
   save(): Promise<void> | undefined;
+
+  allocateUniqueId(): number;
 }
 
 export const PersonContext = createContext<IPersonContext>({
@@ -16,5 +18,6 @@ export const PersonContext = createContext<IPersonContext>({
   current: () => undefined,
   rollback: () => {},
   update: () => {},
-  save: () => undefined
+  save: () => undefined,
+  allocateUniqueId: () => 0
 });

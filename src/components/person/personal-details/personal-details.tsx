@@ -24,12 +24,14 @@ const { Panel } = Collapse;
 const { Text } = Typography;
 
 export const PersonalDetails = () => {
-  const countries = useGetArrayData('countries');
+  const countries = useGetArrayData<string>('countries');
   const personContext = useContext(PersonContext);
-  const nameVariantTypes = useGetArrayData('nameVariantTypes');
-  const titleTypes = useGetArrayData('titleTypes');
-  const linkTypes = useGetArrayData('linkTypes');
-  const profileInformationTypes = useGetArrayData('profileInformationTypes');
+  const nameVariantTypes = useGetArrayData<string>('nameVariantTypes');
+  const titleTypes = useGetArrayData<string>('titleTypes');
+  const linkTypes = useGetArrayData<string>('linkTypes');
+  const profileInformationTypes = useGetArrayData<string>(
+    'profileInformationTypes'
+  );
   const current = personContext.current();
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
 

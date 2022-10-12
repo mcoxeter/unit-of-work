@@ -1,9 +1,14 @@
-import { DatePicker, Form, Input, InputNumber } from 'antd';
+import { DatePicker, Form, Input } from 'antd';
 import moment from 'moment';
-import { AffilationsItem } from '../../../auto-gen/interfaces';
+import {
+  AffilationsItem,
+  ExternalOrganizationLookupItem
+} from '../../../auto-gen/interfaces';
+import { ExternalOrganization } from './external-organization';
 
 export interface OrganizationalAffilationProps {
   affilationsItem: AffilationsItem;
+  externalOrganizationLookup: ExternalOrganizationLookupItem[];
   onChange: (value: AffilationsItem) => void;
 }
 
@@ -15,10 +20,11 @@ export const OrganizationalAffilation = (
   return (
     <>
       <Form.Item label='Affiliation'>
-        <InputNumber
-          value={affilationsItem.affiliation}
+        <ExternalOrganization
+          externalOrganizationRef={affilationsItem.externalOrganizationRef}
+          externalOrganizationLookup={props.externalOrganizationLookup}
           onChange={(v) =>
-            props.onChange({ ...affilationsItem, affiliation: v ?? 0 })
+            props.onChange({ ...affilationsItem, externalOrganizationRef: v })
           }
         />
       </Form.Item>

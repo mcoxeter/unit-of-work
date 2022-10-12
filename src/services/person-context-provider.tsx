@@ -11,6 +11,7 @@ export interface PersonContextProviderProps {
 export const PersonContextProvider = (props: PersonContextProviderProps) => {
   const [current, setCurrent] = useState<PersonsItem | undefined>(undefined);
   const [original, setOriginal] = useState<PersonsItem | undefined>(undefined);
+  const [uniqueId, setUniqueId] = useState(-1);
   const originalPerson = usePerson(props.id);
   useEffect(() => {
     setCurrent(originalPerson);
@@ -30,6 +31,11 @@ export const PersonContextProvider = (props: PersonContextProviderProps) => {
             await savePerson(current);
             setOriginal(current);
           }
+        },
+        allocateUniqueId: () => {
+          console.log('HERE', uniqueId);
+          setUniqueId((prev) => prev - 1);
+          return uniqueId;
         }
       }}
     >

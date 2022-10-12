@@ -1,7 +1,6 @@
 // @flow
 export type RootObject = {
     persons: PersonsItem[];
-    company: CompanyItem[];
     countries: string[];
     gendersTypes: string[];
     nameVariantTypes: string[];
@@ -10,7 +9,7 @@ export type RootObject = {
     profilePhotosTypes: string[];
     linkTypes: string[];
     profileInformationTypes: string[];
-    ogranizationalAffilationsTypes: OgranizationalAffilationsTypesItem[];
+    externalOrganizationLookup: ExternalOrganizationLookupItem[];
     employedAsTypes: string[];
     contractTypes: string[];
     exOfficioTypes: string[];
@@ -77,7 +76,7 @@ export type OrganizationalAffilations = {
 export type AffilationsItem = {
     id: number;
     type: string;
-    affiliation: number;
+    externalOrganizationRef: ExternalOrganizationRef;
     employedAs: string;
     startDate: string;
     endDate: string;
@@ -89,6 +88,14 @@ export type AffilationsItem = {
     physicalAddresses: PhysicalAddressesItem[];
     electronicAddresses: ElectronicAddresses;
     staffId: string;
+};
+export type ExternalOrganizationRef = {
+    refId: number;
+    new_value: New_value;
+};
+export type New_value = {
+    name: string;
+    unit: string;
 };
 export type Keywords = {
     exOfficio?: string[];
@@ -137,11 +144,7 @@ export type ProjectTitleItem = {
     countryCode: string;
     value: string;
 };
-export type CompanyItem = {
-    id: string;
-    name: string;
-};
-export type OgranizationalAffilationsTypesItem = {
+export type ExternalOrganizationLookupItem = {
     id: number;
     name: string;
     unit: string;

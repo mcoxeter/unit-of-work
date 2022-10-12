@@ -36,7 +36,10 @@
           "verificationStatus": "Verified"
         }
       ],
-      "orcidId": ["0000-0002-1685-233x", "1234-1234-1233-233x"],
+      "orcidId": [
+        "0000-0002-1685-233x",
+        "1234-1234-1233-233x"
+      ],
       "profilePhotos": [
         {
           "type": "Portrait",
@@ -67,7 +70,13 @@
           {
             "id": 124356,
             "type": "Staff",
-            "affiliation": 2,
+            "externalOrganizationRef": {
+              "refId": 3,
+              "new_value": {
+                "name": "New item",
+                "unit": "New unit"
+              }
+            },
             "employedAs": "No Value",
             "startDate": "2022-08-15T09:44:04.057Z",
             "endDate": "",
@@ -76,7 +85,9 @@
             "jobTitle": "No Value",
             "jobDescription": "",
             "keywords": {
-              "exOfficio": ["Board of Studies Chair"],
+              "exOfficio": [
+                "Board of Studies Chair"
+              ],
               "grade": []
             },
             "physicalAddresses": [
@@ -94,9 +105,15 @@
               }
             ],
             "electronicAddresses": {
-              "phoneNumbers": ["1232456"],
-              "emailAddresses": ["mcoxeter@gamil.com"],
-              "webAddresses": ["www.this.that"]
+              "phoneNumbers": [
+                "1232456"
+              ],
+              "emailAddresses": [
+                "mcoxeter@gamil.com"
+              ],
+              "webAddresses": [
+                "www.this.that"
+              ]
             },
             "staffId": "12354"
           }
@@ -133,7 +150,10 @@
       ],
       "keywords": {
         "keywords": [],
-        "sdgs": ["SDG1 - No Poverty", "SDG 2 - Zero Hunger"]
+        "sdgs": [
+          "SDG1 - No Poverty",
+          "SDG 2 - Zero Hunger"
+        ]
       },
       "visibility": "Public - No restriction"
     }
@@ -333,7 +353,11 @@
     "Zambia",
     "Zimbabwe"
   ],
-  "gendersTypes": ["Male", "Female", "Unknown"],
+  "gendersTypes": [
+    "Male",
+    "Female",
+    "Unknown"
+  ],
   "nameVariantTypes": [
     "Default publishing name",
     "Former name",
@@ -353,7 +377,10 @@
     "Candidate for verification",
     "Candidate for removal"
   ],
-  "profilePhotosTypes": ["Portait", "Gallery"],
+  "profilePhotosTypes": [
+    "Portait",
+    "Gallery"
+  ],
   "linkTypes": [
     "No value",
     "Unspecified",
@@ -365,8 +392,10 @@
     "Twitter",
     "Portal multimedia"
   ],
-  "profileInformationTypes": ["Research interests"],
-  "ogranizationalAffilationsTypes": [
+  "profileInformationTypes": [
+    "Research interests"
+  ],
+  "externalOrganizationLookup": [
     {
       "id": 1,
       "name": "Pure Academy",
@@ -388,14 +417,25 @@
       "unit": "Department"
     }
   ],
-  "employedAsTypes": ["No value", "Academic", "Honorary"],
-  "contractTypes": ["No value", "Fixed-term", "Open ended"],
+  "employedAsTypes": [
+    "No value",
+    "Academic",
+    "Honorary"
+  ],
+  "contractTypes": [
+    "No value",
+    "Fixed-term",
+    "Open ended"
+  ],
   "exOfficioTypes": [
     "Board of Studies Chair",
     "Departmental Research Committee Chair",
     "Deputy Head of Department"
   ],
-  "physicalAddressesTypes": ["Visiting address", "Postal address"],
+  "physicalAddressesTypes": [
+    "Visiting address",
+    "Postal address"
+  ],
   "sdgsTypes": [
     "SGD 1 - No Poverty",
     "SDG 2 - Zero Hunger",
