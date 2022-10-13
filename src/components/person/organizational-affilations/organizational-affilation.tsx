@@ -7,6 +7,7 @@ import {
 } from '../../../auto-gen/interfaces';
 import { useGetArrayData } from '../../../services/useGetArrayData';
 import { ExternalOrganization } from './external-organization';
+import { OrganizationAffilationKeywords } from './organizational-affilation-keywords';
 const { Option } = Select;
 
 export interface OrganizationalAffilationProps {
@@ -130,6 +131,15 @@ export const OrganizationalAffilation = (
           }
         />
       </Form.Item>
+      <OrganizationAffilationKeywords
+        keywords={affilationsItem.keywords}
+        onChange={(v) =>
+          props.onChange({
+            ...affilationsItem,
+            keywords: v
+          })
+        }
+      />
     </>
   );
 };
