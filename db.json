@@ -71,10 +71,10 @@
             "id": 124356,
             "type": "Staff",
             "externalOrganizationRef": {
-              "refId": 3,
+              "refId": -1,
               "new_value": {
-                "name": "New item",
-                "unit": "New unit"
+                "name": "",
+                "unit": ""
               }
             },
             "employedAs": "No Value",

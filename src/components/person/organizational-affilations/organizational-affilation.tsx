@@ -19,15 +19,13 @@ export const OrganizationalAffilation = (
 
   return (
     <>
-      <Form.Item label='Affiliation'>
-        <ExternalOrganization
-          externalOrganizationRef={affilationsItem.externalOrganizationRef}
-          externalOrganizationLookup={props.externalOrganizationLookup}
-          onChange={(v) =>
-            props.onChange({ ...affilationsItem, externalOrganizationRef: v })
-          }
-        />
-      </Form.Item>
+      <ExternalOrganization
+        externalOrganizationRef={affilationsItem.externalOrganizationRef}
+        externalOrganizationLookup={props.externalOrganizationLookup}
+        onChange={(v) =>
+          props.onChange({ ...affilationsItem, externalOrganizationRef: v })
+        }
+      />
       <Form.Item label='Employed As'>
         <Input
           type={'text'}
