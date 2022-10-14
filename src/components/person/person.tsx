@@ -40,16 +40,11 @@ export const Person = () => {
           <PersonalDetails />
         </Panel>
         <Panel
-          key={'Ogranizational affilations'}
-          header={`Ogranizational affilations`}
+          key={'Organizational affilations'}
+          header={`Organizational affilations`}
           extra={current.organizationalAffilations.affilations.map(
             (item, i) => (
               <span key={i}>
-                <Text>
-                  {externalOrganizationLookup.find(
-                    (lookup) => lookup.id === item.externalOrganizationRef.refId
-                  )?.name ?? item.externalOrganizationRef.new_value.name}{' '}
-                </Text>
                 <Tag color='processing'>{item.type}</Tag>
               </span>
             )

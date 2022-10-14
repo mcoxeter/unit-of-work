@@ -16,6 +16,8 @@ export type RootObject = {
     physicalAddressesTypes: string[];
     sdgsTypes: string[];
     visibilityTypes: string[];
+    attendanceStatuses: string[];
+    studentResidencyFlags: string[];
 };
 export type PersonsItem = {
     id: number;
@@ -76,18 +78,26 @@ export type OrganizationalAffilations = {
 export type AffilationsItem = {
     id: number;
     type: string;
-    externalOrganizationRef: ExternalOrganizationRef;
-    employedAs: string;
+    externalOrganizationRef?: ExternalOrganizationRef;
+    employedAs?: string;
     startDate: string;
     endDate: string;
     fte: string;
-    contractType: string;
-    jobTitle: string;
-    jobDescription: string;
+    contractType?: string;
+    jobTitle?: string;
+    jobDescription?: string;
     keywords: Keywords;
     physicalAddresses: PhysicalAddressesItem[];
     electronicAddresses: ElectronicAddresses;
-    staffId: string;
+    staffId?: string;
+    projectTitle?: string;
+    programTitle?: string;
+    awardGained?: string;
+    awardDate?: string;
+    studentID?: string;
+    details?: Details;
+    nationality?: string;
+    studentResidencyFlag?: string;
 };
 export type ExternalOrganizationRef = {
     refId: number;
@@ -100,6 +110,13 @@ export type New_value = {
 export type Keywords = {
     exOfficio?: string[];
     grade?: any[];
+    fieldOfStudy?: string[];
+    hesaSubject?: string[];
+    interimStatus?: string[];
+    programMainAttainment?: string[];
+    outcome?: string[];
+    mode?: string[];
+    regristrationStatuses?: string[];
     keywords?: any[];
     sdgs?: string[];
 };
@@ -120,6 +137,16 @@ export type ElectronicAddresses = {
     phoneNumbers: string[];
     emailAddresses: string[];
     webAddresses: string[];
+};
+export type Details = {
+    expectedStudyDuration: string;
+    minimumStudyDuration: string;
+    maximumStudyDuration: string;
+    programYear: string;
+    initialSubmissionDate: string;
+    expectedEndDate: string;
+    startYear: string;
+    attendanceStatus: string;
 };
 export type ExternalPositionsItem = {
     appointment: AppointmentItem[];

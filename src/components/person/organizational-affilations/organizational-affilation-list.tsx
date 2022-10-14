@@ -7,7 +7,9 @@ import {
 } from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
 import { ListOrderControl } from '../../list-order-control';
-import { OrganizationalAffilation } from './organizational-affilation';
+import { NewAffilation } from './new-affilation';
+import { StaffAffilation } from './staff-affilation';
+import { StudentAffilation } from './student-affilation';
 export interface OrganizationAffilationListProps {
   affilations: AffilationsItem[];
   externalOrganizationLookup: ExternalOrganizationLookupItem[];
@@ -57,7 +59,12 @@ export const OrganizationAffilationList = (
       <Button
         icon={<PlusOutlined />}
         type='dashed'
-        onClick={() => props.onChange(affilations.concat(newItem))}
+        onClick={() => {
+          props.onChange(affilations.concat(newItem));
+          setActivePanels((old) =>
+            old.concat(`Affilation${affilations.length}`)
+          );
+        }}
       >
         Add
       </Button>
@@ -65,29 +72,46 @@ export const OrganizationAffilationList = (
         {affilations.map((affilation, i) => (
           <Panel
             key={'Affilation' + i}
-            header={`${
-              props.externalOrganizationLookup.find(
-                (x) => affilation.externalOrganizationRef.refId === x.id
-              )?.name ?? affilation.externalOrganizationRef.new_value.name
-            }`}
+            header={`${affilation.type} Affilation${i}`}
             extra={
               <ListOrderControl
                 index={i}
-                values={affilations}
+                values={props.affilations}
                 onChange={props.onChange}
               />
             }
           >
-            <OrganizationalAffilation
-              key={i}
-              affilationsItem={affilation}
-              externalOrganizationLookup={props.externalOrganizationLookup}
-              onChange={(value) => {
-                return props.onChange(
-                  affilations.map((_x, _i) => (_i === i ? value : _x))
-                );
-              }}
-            />
+            {affilation.type === 'Staff' && (
+              <StaffAffilation
+                affilationsItem={affilation}
+                externalOrganizationLookup={props.externalOrganizationLookup}
+                onChange={(value) => {
+                  return props.onChange(
+                    props.affilations.map((_x, _i) => (_i === i ? value : _x))
+                  );
+                }}
+              />
+            )}
+            {affilation.type === 'Student' && (
+              <StudentAffilation
+                affilationsItem={affilation}
+                onChange={(value) => {
+                  return props.onChange(
+                    props.affilations.map((_x, _i) => (_i === i ? value : _x))
+                  );
+                }}
+              />
+            )}
+            {affilation.type === '' && (
+              <NewAffilation
+                affilationsItem={affilation}
+                onChange={(value) => {
+                  return props.onChange(
+                    props.affilations.map((_x, _i) => (_i === i ? value : _x))
+                  );
+                }}
+              />
+            )}
           </Panel>
         ))}
       </Collapse>

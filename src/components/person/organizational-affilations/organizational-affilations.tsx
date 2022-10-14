@@ -1,4 +1,4 @@
-import { Col, DatePicker, Form, Input, Row } from 'antd';
+import { Col, DatePicker, Form, Row } from 'antd';
 import moment from 'moment';
 import {
   ExternalOrganizationLookupItem,
@@ -27,18 +27,6 @@ export const OrgAffilations = (props: OrgAffilationsProps) => {
                 props.onChange({
                   ...organizationalAffilations,
                   startDateAtInstution: v?.toJSON() ?? ''
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item label='FTE'>
-            <Input
-              type='text'
-              value={organizationalAffilations.fte}
-              onChange={(v) =>
-                props.onChange({
-                  ...organizationalAffilations,
-                  fte: v.target.value
                 })
               }
             />

@@ -36,7 +36,10 @@
           "verificationStatus": "Verified"
         }
       ],
-      "orcidId": ["0000-0002-1685-233x", "1234-1234-1233-233x"],
+      "orcidId": [
+        "0000-0002-1685-233x",
+        "1234-1234-1233-233x"
+      ],
       "profilePhotos": [
         {
           "type": "Portrait",
@@ -82,7 +85,9 @@
             "jobTitle": "No Value",
             "jobDescription": "",
             "keywords": {
-              "exOfficio": ["Board of Studies Chair"],
+              "exOfficio": [
+                "Board of Studies Chair"
+              ],
               "grade": []
             },
             "physicalAddresses": [
@@ -100,11 +105,89 @@
               }
             ],
             "electronicAddresses": {
-              "phoneNumbers": ["1232456"],
-              "emailAddresses": ["mcoxeter@gamil.com"],
-              "webAddresses": ["www.this.that"]
+              "phoneNumbers": [
+                "1232456"
+              ],
+              "emailAddresses": [
+                "mcoxeter@gamil.com"
+              ],
+              "webAddresses": [
+                "www.this.that"
+              ]
             },
             "staffId": "12354"
+          },
+          {
+            "id": 546,
+            "type": "Student",
+            "fte": "1.03",
+            "startDate": "2022-08-15T09:44:04.057Z",
+            "endDate": "",
+            "projectTitle": "",
+            "programTitle": "",
+            "awardGained": "",
+            "awardDate": "2022-08-15T09:44:04.057Z",
+            "keywords": {
+              "fieldOfStudy": [
+                "Approved"
+              ],
+              "hesaSubject": [
+                ""
+              ],
+              "interimStatus": [
+                ""
+              ],
+              "programMainAttainment": [
+                ""
+              ],
+              "outcome": [
+                ""
+              ],
+              "mode": [
+                ""
+              ],
+              "regristrationStatuses": [
+                ""
+              ]
+            },
+            "physicalAddresses": [
+              {
+                "type": "Visiting address",
+                "street": "Askevej 12",
+                "building": "",
+                "postcode": "9982",
+                "city": "Aalborg",
+                "country": "DK",
+                "geoLocation": {
+                  "point": "",
+                  "polygon": ""
+                }
+              }
+            ],
+            "electronicAddresses": {
+              "phoneNumbers": [
+                "1232456"
+              ],
+              "emailAddresses": [
+                "mcoxeter@gamil.com"
+              ],
+              "webAddresses": [
+                "www.this.that"
+              ]
+            },
+            "studentID": "1255642",
+            "details": {
+              "expectedStudyDuration": "",
+              "minimumStudyDuration": "",
+              "maximumStudyDuration": "",
+              "programYear": "",
+              "initialSubmissionDate": "",
+              "expectedEndDate": "",
+              "startYear": "",
+              "attendanceStatus": "Graduated"
+            },
+            "nationality": "United Kingdom",
+            "studentResidencyFlag": "Home"
           }
         ]
       },
@@ -139,7 +222,10 @@
       ],
       "keywords": {
         "keywords": [],
-        "sdgs": ["SDG1 - No Poverty", "SDG 2 - Zero Hunger"]
+        "sdgs": [
+          "SDG1 - No Poverty",
+          "SDG 2 - Zero Hunger"
+        ]
       },
       "visibility": "Public - No restriction"
     }
@@ -339,7 +425,11 @@
     "Zambia",
     "Zimbabwe"
   ],
-  "gendersTypes": ["Male", "Female", "Unknown"],
+  "gendersTypes": [
+    "Male",
+    "Female",
+    "Unknown"
+  ],
   "nameVariantTypes": [
     "Default publishing name",
     "Former name",
@@ -359,7 +449,10 @@
     "Candidate for verification",
     "Candidate for removal"
   ],
-  "profilePhotosTypes": ["Portait", "Gallery"],
+  "profilePhotosTypes": [
+    "Portait",
+    "Gallery"
+  ],
   "linkTypes": [
     "No value",
     "Unspecified",
@@ -371,7 +464,9 @@
     "Twitter",
     "Portal multimedia"
   ],
-  "profileInformationTypes": ["Research interests"],
+  "profileInformationTypes": [
+    "Research interests"
+  ],
   "externalOrganizationLookup": [
     {
       "id": 1,
@@ -394,14 +489,25 @@
       "unit": "Department"
     }
   ],
-  "employedAsTypes": ["No value", "Academic", "Honorary"],
-  "contractTypes": ["No value", "Fixed-term", "Open ended"],
+  "employedAsTypes": [
+    "No value",
+    "Academic",
+    "Honorary"
+  ],
+  "contractTypes": [
+    "No value",
+    "Fixed-term",
+    "Open ended"
+  ],
   "exOfficioTypes": [
     "Board of Studies Chair",
     "Departmental Research Committee Chair",
     "Deputy Head of Department"
   ],
-  "physicalAddressesTypes": ["Visiting address", "Postal address"],
+  "physicalAddressesTypes": [
+    "Visiting address",
+    "Postal address"
+  ],
   "sdgsTypes": [
     "SGD 1 - No Poverty",
     "SDG 2 - Zero Hunger",
@@ -425,5 +531,27 @@
     "Public - No restriction",
     "Campus - Restricted to specific IP range",
     "Backen - Restricted to Pure users"
+  ],
+  "attendanceStatuses": [
+    "No Value",
+    "Graduated",
+    "Current",
+    "Completed",
+    "Interrupted",
+    "Live",
+    "Provisional",
+    "Withdrawn",
+    "Canceled"
+  ],
+  "studentResidencyFlags": [
+    "Unknown",
+    "Home",
+    "Overseas"
+  ],
+  "organizationAffiliationTypes": [
+    "Staff",
+    "Student",
+    "Visiting Scholar",
+    "Honorary Staff"
   ]
 }
