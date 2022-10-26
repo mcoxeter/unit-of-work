@@ -1,10 +1,11 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Collapse } from 'antd';
+import { Button, Collapse, Tag, Typography } from 'antd';
 import { useState } from 'react';
 import { TitlesItem } from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
 import { ListOrderControl } from '../../list-order-control';
 import { Title } from './title';
+const { Text } = Typography;
 export interface TitleListProps {
   titles: TitlesItem[];
   titleTypes: string[];
@@ -58,5 +59,18 @@ export const TitleList = (props: TitleListProps) => {
         ))}
       </Collapse>
     </Flex>
+  );
+};
+
+export const TitleListSummary = ({ titles }: { titles: TitlesItem[] }) => {
+  return (
+    <>
+      {titles.map((v, i) => (
+        <span key={i}>
+          <Text>{v.title} </Text>
+          <Tag color='processing'>{v.type}</Tag>
+        </span>
+      ))}
+    </>
   );
 };

@@ -1,4 +1,4 @@
-import { Col, Collapse, DatePicker, Form, Row, Tag, Typography } from 'antd';
+import { Col, Collapse, Row, Tag, Typography } from 'antd';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../../../services/person-context';
 import { useGetArrayData } from '../../../services/useGetArrayData';
@@ -7,26 +7,26 @@ import { LookupEditor } from '../../basic-editors/lookup-editor';
 import { StringEditor } from '../../basic-editors/string-edititor';
 import { IdList } from './id-list';
 import { LinkList } from './link-list';
-import { NameVariantList } from './name-variant-list';
+import { NameVariantList, NameVariantListSummary } from './name-variant-list';
 import { OrcidIDList } from './orcid-id-list';
 import { ProfileInformationList } from './profile-information-list';
-import { TitleList } from './title-list';
+import { TitleList, TitleListSummary } from './title-list';
 const { Panel } = Collapse;
 const { Text } = Typography;
 
 export const PersonalDetails = () => {
   const countries = useGetArrayData<string>('countries');
-  const personContext = useContext(PersonContext);
+  const cntx = useContext(PersonContext);
   const nameVariantTypes = useGetArrayData<string>('nameVariantTypes');
   const titleTypes = useGetArrayData<string>('titleTypes');
   const linkTypes = useGetArrayData<string>('linkTypes');
   const profileInformationTypes = useGetArrayData<string>(
     'profileInformationTypes'
   );
-  const current = personContext.current();
+  const person = cntx.current();
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
 
-  if (current === undefined) {
+  if (person === undefined) {
     return null;
   }
   return (
@@ -35,55 +35,49 @@ export const PersonalDetails = () => {
         <Col span={12}>
           <StringEditor
             label='Forename'
-            value={current.forename}
-            onChange={(forename) =>
-              personContext.update({ ...current, forename })
-            }
+            value={person.forename}
+            onChange={(forename) => cntx.update({ ...person, forename })}
           />
           <StringEditor
             label='Surname'
-            value={current.surname}
-            onChange={(surname) =>
-              personContext.update({ ...current, surname })
-            }
+            value={person.surname}
+            onChange={(surname) => cntx.update({ ...person, surname })}
           />
           <LookupEditor
             label='Gender'
-            value={current.gender}
-            onChange={(v) => personContext.update({ ...current, gender: v })}
+            value={person.gender}
+            onChange={(v) => cntx.update({ ...person, gender: v })}
             choices={['Male', 'Female', 'Unknown']}
           />
         </Col>
         <Col span={12}>
           <DateEditor
             label='Date of Birth'
-            value={current.dob}
-            onChange={(dob) => personContext.update({ ...current, dob })}
+            value={person.dob}
+            onChange={(dob) => cntx.update({ ...person, dob })}
           />
           <LookupEditor
             label='Nationality'
-            value={current.nationality}
-            onChange={(v) =>
-              personContext.update({ ...current, nationality: v })
-            }
+            value={person.nationality}
+            onChange={(v) => cntx.update({ ...person, nationality: v })}
             choices={countries}
           />
           <DateEditor
             label='Start date as independent researched'
-            value={current.startDateAsIndependentResearcher}
+            value={person.startDateAsIndependentResearcher}
             onChange={(startDateAsIndependentResearcher) =>
-              personContext.update({
-                ...current,
+              cntx.update({
+                ...person,
                 startDateAsIndependentResearcher
               })
             }
           />
           <DateEditor
             label='Retirement date'
-            value={current.retirementDate}
+            value={person.retirementDate}
             onChange={(retirementDate) =>
-              personContext.update({
-                ...current,
+              cntx.update({
+                ...person,
                 retirementDate
               })
             }
@@ -94,43 +88,31 @@ export const PersonalDetails = () => {
         <Panel
           key={'variant-list'}
           header={'Variants'}
-          extra={current.nameVariants.map((v, i) => (
-            <span key={i}>
-              <Text>
-                {v.forename} {v.surname}{' '}
-              </Text>
-              <Tag color='processing'>{v.type}</Tag>
-            </span>
-          ))}
+          extra={<NameVariantListSummary nameVariants={person.nameVariants} />}
         >
           <NameVariantList
-            nameVariants={current.nameVariants}
+            nameVariants={person.nameVariants}
             nameVariantTypes={nameVariantTypes}
-            onChange={(v) =>
-              personContext.update({ ...current, nameVariants: v })
+            onChange={(nameVariants) =>
+              cntx.update({ ...person, nameVariants })
             }
           />
         </Panel>
         <Panel
           key={'title-list'}
           header={`Titles`}
-          extra={current.titles.map((v, i) => (
-            <span key={i}>
-              <Text>{v.title} </Text>
-              <Tag color='processing'>{v.type}</Tag>
-            </span>
-          ))}
+          extra={<TitleListSummary titles={person.titles} />}
         >
           <TitleList
-            titles={current.titles}
+            titles={person.titles}
             titleTypes={titleTypes}
-            onChange={(v) => personContext.update({ ...current, titles: v })}
+            onChange={(titles) => cntx.update({ ...person, titles })}
           />
         </Panel>
         <Panel
           key={'id-list'}
           header={`IDs`}
-          extra={current.personId.map((v, i) => (
+          extra={person.personId.map((v, i) => (
             <span key={i}>
               <Text>{v.id} </Text>
               <Tag color='processing'>{v.type}</Tag>
@@ -138,38 +120,38 @@ export const PersonalDetails = () => {
           ))}
         >
           <IdList
-            ids={current.personId}
+            ids={person.personId}
             idTypes={[]}
-            onChange={(v) => personContext.update({ ...current, personId: v })}
+            onChange={(personId) => cntx.update({ ...person, personId })}
           />
         </Panel>
         <Panel
           key={'orcidID-list'}
           header={`Orcid IDs`}
-          extra={current.orcidId.map((v, i) => (
+          extra={person.orcidId.map((v, i) => (
             <span key={i}>
               <Tag color='processing'>{v}</Tag>{' '}
             </span>
           ))}
         >
           <OrcidIDList
-            orcidIDs={current.orcidId}
-            onChange={(v) => personContext.update({ ...current, orcidId: v })}
+            orcidIDs={person.orcidId}
+            onChange={(orcidId) => cntx.update({ ...person, orcidId })}
           />
         </Panel>
         <Panel
           key={'link-list'}
           header={`Links`}
           extra={
-            <Tag color='processing'>{`${current.links.length} link${
-              current.links.length > 1 ? 's' : ''
+            <Tag color='processing'>{`${person.links.length} link${
+              person.links.length > 1 ? 's' : ''
             }`}</Tag>
           }
         >
           <LinkList
-            links={current.links}
+            links={person.links}
             linkTypes={linkTypes}
-            onChange={(v) => personContext.update({ ...current, links: v })}
+            onChange={(v) => cntx.update({ ...person, links: v })}
           />
         </Panel>
         <Panel
@@ -177,16 +159,14 @@ export const PersonalDetails = () => {
           header={`Profile Information`}
           extra={
             <Tag color='processing'>{`${
-              current.profileInformation.length
-            } profile${current.profileInformation.length > 1 ? 's' : ''}`}</Tag>
+              person.profileInformation.length
+            } profile${person.profileInformation.length > 1 ? 's' : ''}`}</Tag>
           }
         >
           <ProfileInformationList
-            profileInformations={current.profileInformation}
+            profileInformations={person.profileInformation}
             profileInformationTypes={profileInformationTypes}
-            onChange={(v) =>
-              personContext.update({ ...current, profileInformation: v })
-            }
+            onChange={(v) => cntx.update({ ...person, profileInformation: v })}
           />
         </Panel>
       </Collapse>

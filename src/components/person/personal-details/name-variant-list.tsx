@@ -1,10 +1,11 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, Collapse } from 'antd';
+import { Button, Collapse, Tag, Typography } from 'antd';
 import { useState } from 'react';
 import { NameVariantsItem } from '../../../auto-gen/interfaces';
 import { Flex } from '../../flex';
 import { ListOrderControl } from '../../list-order-control';
 import { NameVariant } from './name-variant';
+const { Text } = Typography;
 export interface NameVariantListProps {
   nameVariants: NameVariantsItem[];
   nameVariantTypes: string[];
@@ -59,5 +60,24 @@ export const NameVariantList = (props: NameVariantListProps) => {
         ))}
       </Collapse>
     </Flex>
+  );
+};
+
+export const NameVariantListSummary = ({
+  nameVariants
+}: {
+  nameVariants: NameVariantsItem[];
+}) => {
+  return (
+    <>
+      {nameVariants.map((v, i) => (
+        <span key={i}>
+          <Text>
+            {v.forename} {v.surname}{' '}
+          </Text>
+          <Tag color='processing'>{v.type}</Tag>
+        </span>
+      ))}
+    </>
   );
 };
