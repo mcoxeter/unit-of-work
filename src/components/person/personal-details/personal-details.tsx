@@ -1,25 +1,16 @@
-import {
-  Col,
-  Collapse,
-  DatePicker,
-  Form,
-  Input,
-  Row,
-  Select,
-  Tag,
-  Typography
-} from 'antd';
-import moment from 'moment';
+import { Col, Collapse, DatePicker, Form, Row, Tag, Typography } from 'antd';
 import { useContext, useState } from 'react';
 import { PersonContext } from '../../../services/person-context';
 import { useGetArrayData } from '../../../services/useGetArrayData';
+import { DateEditor } from '../../basic-editors/date-editor';
+import { LookupEditor } from '../../basic-editors/lookup-editor';
+import { StringEditor } from '../../basic-editors/string-edititor';
 import { IdList } from './id-list';
 import { LinkList } from './link-list';
 import { NameVariantList } from './name-variant-list';
 import { OrcidIDList } from './orcid-id-list';
 import { ProfileInformationList } from './profile-information-list';
 import { TitleList } from './title-list';
-const { Option } = Select;
 const { Panel } = Collapse;
 const { Text } = Typography;
 
@@ -42,112 +33,61 @@ export const PersonalDetails = () => {
     <>
       <Row gutter={12}>
         <Col span={12}>
-          <Form.Item label='Forename'>
-            <Input
-              type={'text'}
-              value={current.forename}
-              onChange={(v) => {
-                personContext.update({ ...current, forename: v.target.value });
-              }}
-            />
-          </Form.Item>
-          <Form.Item label='Surname'>
-            <Input
-              type={'text'}
-              value={current.surname}
-              onChange={(v) =>
-                personContext.update({ ...current, surname: v.target.value })
-              }
-            ></Input>
-          </Form.Item>
-          <Form.Item label='Gender'>
-            <Select
-              showSearch
-              value={current.gender}
-              style={{ width: 200 }}
-              placeholder='Search to Select'
-              optionFilterProp='children'
-              filterOption={(input, option) =>
-                (option!.children as unknown as string).includes(input)
-              }
-              filterSort={(optionA, optionB) =>
-                (optionA!.children as unknown as string)
-                  .toLowerCase()
-                  .localeCompare(
-                    (optionB!.children as unknown as string).toLowerCase()
-                  )
-              }
-              onChange={(v) => personContext.update({ ...current, gender: v })}
-            >
-              <Option value='Male'>Male</Option>
-              <Option value='Female'>Female</Option>
-              <Option value='Unknown'>Unknown</Option>
-            </Select>
-          </Form.Item>
+          <StringEditor
+            label='Forename'
+            value={current.forename}
+            onChange={(forename) =>
+              personContext.update({ ...current, forename })
+            }
+          />
+          <StringEditor
+            label='Surname'
+            value={current.surname}
+            onChange={(surname) =>
+              personContext.update({ ...current, surname })
+            }
+          />
+          <LookupEditor
+            label='Gender'
+            value={current.gender}
+            onChange={(v) => personContext.update({ ...current, gender: v })}
+            choices={['Male', 'Female', 'Unknown']}
+          />
         </Col>
         <Col span={12}>
-          {' '}
-          <Form.Item label='Date of Birth'>
-            <DatePicker
-              allowClear={false}
-              value={moment(current.dob)}
-              onChange={(v) =>
-                personContext.update({ ...current, dob: v?.toJSON() ?? '' })
-              }
-            />
-          </Form.Item>
-          <Form.Item label='Nationality'>
-            <Select
-              showSearch
-              value={current.nationality}
-              style={{ width: 200 }}
-              placeholder='Search to Select'
-              optionFilterProp='children'
-              filterOption={(input, option) =>
-                (option!.children as unknown as string).includes(input)
-              }
-              filterSort={(optionA, optionB) =>
-                (optionA!.children as unknown as string)
-                  .toLowerCase()
-                  .localeCompare(
-                    (optionB!.children as unknown as string).toLowerCase()
-                  )
-              }
-              onChange={(v) =>
-                personContext.update({ ...current, nationality: v })
-              }
-            >
-              {countries.map((x) => (
-                <Option key={x} value={x}>
-                  {x}
-                </Option>
-              ))}
-            </Select>
-          </Form.Item>
-          <Form.Item label='Start date as independent researched'>
-            <DatePicker
-              allowClear={false}
-              value={moment(current.startDateAsIndependentResearcher)}
-              onChange={(v) =>
-                personContext.update({
-                  ...current,
-                  startDateAsIndependentResearcher: v?.toJSON() ?? ''
-                })
-              }
-            />
-          </Form.Item>
-          <Form.Item label='Retirement date'>
-            <DatePicker
-              allowClear={false}
-              value={moment(current.retirementDate)}
-              onChange={(v) =>
-                personContext.update({
-                  ...current,
-                  retirementDate: v?.toJSON() ?? ''
-                })
-              }
-            />
-          </Form.Item>
+          <DateEditor
+            label='Date of Birth'
+            value={current.dob}
+            onChange={(dob) => personContext.update({ ...current, dob })}
+          />
+          <LookupEditor
+            label='Nationality'
+            value={current.nationality}
+            onChange={(v) =>
+              personContext.update({ ...current, nationality: v })
+            }
+            choices={countries}
+          />
+          <DateEditor
+            label='Start date as independent researched'
+            value={current.startDateAsIndependentResearcher}
+            onChange={(startDateAsIndependentResearcher) =>
+              personContext.update({
+                ...current,
+                startDateAsIndependentResearcher
+              })
+            }
+          />
+          <DateEditor
+            label='Retirement date'
+            value={current.retirementDate}
+            onChange={(retirementDate) =>
+              personContext.update({
+                ...current,
+                retirementDate
+              })
+            }
+          />
         </Col>
       </Row>
       <Collapse activeKey={activePanels} onChange={(v) => setActivePanels(v)}>
