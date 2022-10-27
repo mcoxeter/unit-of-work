@@ -1,15 +1,16 @@
 import { UserOutlined } from '@ant-design/icons';
-import { PageHeader, Button, Progress } from 'antd';
+import { PageHeader, Button, Progress, Badge, Tag } from 'antd';
 import { useContext } from 'react';
 import { PersonContext } from '../../services/person-context';
 import { Flex } from '../flex';
 
 export const PersonHeader = () => {
   const personContext = useContext(PersonContext);
-  const current = personContext.current();
-  if (current === undefined) {
+  if (!personContext) {
     return null;
   }
+
+  const current = personContext.current();
   const isModified = personContext.isModified();
 
   return (
@@ -23,6 +24,21 @@ export const PersonHeader = () => {
       subTitle={`${current.forename} ${current.surname}`}
       extra={
         <Flex>
+          <Tag>{personContext.changeCount()}</Tag>
+          <Button
+            type='primary'
+            disabled={personContext.canUndo() === false}
+            onClick={async () => await personContext.undo()}
+          >
+            Undo
+          </Button>
+          <Button
+            type='primary'
+            disabled={personContext.canRedo() === false}
+            onClick={async () => await personContext.redo()}
+          >
+            Redo
+          </Button>
           <Button
             type='primary'
             disabled={isModified === false}

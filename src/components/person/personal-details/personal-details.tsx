@@ -23,12 +23,12 @@ export const PersonalDetails = () => {
   const profileInformationTypes = useGetArrayData<string>(
     'profileInformationTypes'
   );
-  const person = cntx.current();
   const [activePanels, setActivePanels] = useState<string[] | string>([]);
-
-  if (person === undefined) {
+  if (!cntx) {
     return null;
   }
+  const person = cntx.current();
+
   return (
     <>
       <Row gutter={12}>

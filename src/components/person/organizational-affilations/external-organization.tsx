@@ -22,7 +22,7 @@ export const ExternalOrganization = (props: ExternalOrganizationProps) => {
   const { externalOrganizationRef } = props;
 
   useEffect(() => {
-    setUniqueId(personContext.allocateUniqueId());
+    setUniqueId(personContext?.allocateUniqueId() ?? 0);
   }, []);
 
   const newEO: ExternalOrganizationLookupItem = {

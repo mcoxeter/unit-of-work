@@ -9,7 +9,6 @@ import { PersonalDetails } from './personal-details/personal-details';
 const { Panel } = Collapse;
 const { Text } = Typography;
 export const Person = () => {
-  const personContext = useContext(PersonContext);
   const externalOrganizationLookup =
     useGetArrayData<ExternalOrganizationLookupItem>(
       'externalOrganizationLookup'
@@ -19,10 +18,12 @@ export const Person = () => {
     'Personal details'
   ]);
 
-  const current = personContext.current();
-  if (current === undefined) {
+  const personContext = useContext(PersonContext);
+  if (!personContext) {
     return null;
   }
+
+  const current = personContext.current();
 
   return (
     <Card size='small'>

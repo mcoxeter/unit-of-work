@@ -5,6 +5,8 @@ import { Person } from './components/person/person';
 import { Layout, Menu } from 'antd';
 import { Content, Footer, Header } from 'antd/lib/layout/layout';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import { enablePatches } from 'immer';
+enablePatches();
 
 function App() {
   const menuItems: ItemType[] = [
